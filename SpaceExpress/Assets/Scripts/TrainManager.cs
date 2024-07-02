@@ -3,12 +3,14 @@ using UnityEngine;
 public class TrainManager : MonoBehaviour
 {
     [SerializeField] public float speed = 100.0f;
-    private bool _ready = true; // State of the ready button will be 'ON' for now
+    private bool _ready = false;
     private bool _levelDone = false;
-    
+
+    public bool Ready { get => _ready; set => _ready = value; }
+
     void Update()
     {
-        if (_ready)
+        if (Ready)
         {
             MoveTrain();
         }
