@@ -1,22 +1,28 @@
+using System;
 using UnityEngine;
 
 public class BeamManager : MonoBehaviour
 {
     [SerializeField] float rotationSpeed = 100f;
-    [SerializeField] Color highlightColor = Color.yellow;
+    [SerializeField] Material highlightMaterial;
+    [SerializeField] TrainManager trainManager;
+    private ConstantForce _constantForce;
     private bool _isDragging = false;
+    private bool _hasRail = false;
     private Vector3 _offset;
+    private Vector3 _forceDirection;
     private Camera _mainCamera;
-    private Color _originalColor;
+    private Material _originalMaterial;
     private Renderer _beamRenderer;
     
     void Start()
     {
         _mainCamera = Camera.main;
         _beamRenderer = GetComponent<Renderer>();
+        _constantForce = GetComponent<ConstantForce>();
         if (_beamRenderer != null)
         {
-            _originalColor = _beamRenderer.material.color;
+            _originalMaterial = _beamRenderer.material;
         }
     }
     
@@ -76,7 +82,41 @@ public class BeamManager : MonoBehaviour
     {
         if (_beamRenderer != null)
         {
-            _beamRenderer.material.color = highlight ? highlightColor : _originalColor;
+            _beamRenderer.material = highlight ? highlightMaterial : _originalMaterial;
+        }
+    }
+    
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Wheels"))
+        {
+            // trainManager.OnRail = true;
+            _hasRail = true;
+            StickBeam();
+        }
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject.CompareTag("Wheels"))
+        {
+            // trainManager.OnRail = false;
+            _hasRail = false;
+            StickBeam();
+        }
+    }
+    
+    private void StickBeam()
+    {
+        if (_hasRail)
+        {
+            _forceDirection = new Vector3(0, -100, 0);
+            _constantForce.force = _forceDirection;
+        }
+        else
+        {
+            _forceDirection = new Vector3(0, 0, 0);
+            _constantForce.force = _forceDirection;
         }
     }
 }
