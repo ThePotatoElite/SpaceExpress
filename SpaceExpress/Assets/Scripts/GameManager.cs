@@ -1,9 +1,12 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 // using Cinemachine;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] TrainManager trainManager;
+    [SerializeField] TextMeshProUGUI Tutorial;
     // [SerializeField] GameObject mainCamera;
     // [SerializeField] CinemachineVirtualCamera cinemachineCamera;
     
@@ -47,8 +50,15 @@ public class GameManager : MonoBehaviour
     */
     public void StartDrive()
     {
+        Tutorial.gameObject.SetActive(false);
         trainManager.Ready = true;
+
         // SwitchToCinemachineCamera();
+    }
+
+    public void RestartScene()
+    {
+        SceneManager.LoadScene(0);
     }
     /*
     private void SwitchToCinemachineCamera()
