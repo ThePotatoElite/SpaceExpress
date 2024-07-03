@@ -3,12 +3,13 @@ using UnityEngine;
 public class TrainManager : MonoBehaviour
 {
     [SerializeField] public float speed = 100.0f;
-    [SerializeField] private Rigidbody _trainRB;
+    [SerializeField] Rigidbody trainRb;
+    private Vector3 _beamPosition;
     private int _health = 100;
     private bool _ready = false;
     private bool _levelDone = false;
     public bool _onRail = false;
-
+    
     public bool Ready { get => _ready; set => _ready = value; }
     public bool OnRail { get => _onRail; set => _onRail = value; }
 
@@ -17,22 +18,36 @@ public class TrainManager : MonoBehaviour
         if (Ready)
         {
             if (!OnRail)
-            MoveTrain();
+            { MoveTrain(); }
             else if (OnRail)
             { MoveTrainOnRail(); }
-            
+        }
+    }
+    
+    public void SetOnRail(bool onRail, Vector3 beamPosition)
+    {
+        _onRail = onRail;
+        _beamPosition = beamPosition;
+        if (onRail)
+        {
+            trainRb.AddForce(Vector3.down * 10f, ForceMode.Acceleration); // Apply Beam Force
+        }
+        else
+        {
+            trainRb.AddForce(Vector3.zero, ForceMode.Acceleration); // Remove Beam Force
         }
     }
 
     void MoveTrainOnRail()
     {
-        _trainRB.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
+        trainRb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
         transform.Translate(Vector3.forward * (speed * Time.deltaTime));
     }
+    
     void MoveTrain()
     {
-        //_trainRB.constraints = RigidbodyConstraints.None;
-        _trainRB.constraints = RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
+        //trainRb.constraints = RigidbodyConstraints.None;
+        trainRb.constraints = RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
         transform.Translate(Vector3.forward * (speed * Time.deltaTime));
     }
 

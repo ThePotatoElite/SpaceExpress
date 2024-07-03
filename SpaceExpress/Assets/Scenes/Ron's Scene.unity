@@ -476,11 +476,24 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8759245182632865367, guid: 78de2f6957a9c494c97b0a3a39561661, type: 3}
+      propertyPath: m_Center.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8766988651796433531, guid: 78de2f6957a9c494c97b0a3a39561661, type: 3}
+      propertyPath: trainRb
+      value: 
+      objectReference: {fileID: 407032797}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78de2f6957a9c494c97b0a3a39561661, type: 3}
+--- !u!54 &407032797 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 2575940366767253328, guid: 78de2f6957a9c494c97b0a3a39561661, type: 3}
+  m_PrefabInstance: {fileID: 407032796}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &410011259
 GameObject:
   m_ObjectHideFlags: 0
@@ -828,7 +841,7 @@ GameObject:
   - component: {fileID: 634987544}
   - component: {fileID: 634987543}
   m_Layer: 5
-  m_Name: How to play
+  m_Name: Tutorial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -873,14 +886,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Hold and drag beams to position with the left mouse button
+  m_text: 'Hold and drag beams by the left mouse button
 
 
-    Use the
-    A & D keys to control the beam rotation
-
-
-'
+    Press A & D keys to
+    rotate the beams while holding'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -945,7 +955,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -797.42883, w: -93.49164}
+  m_margin: {x: 0, y: 0, z: -616.48584, w: -93.49164}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1227,7 +1237,6 @@ GameObject:
   - component: {fileID: 891692707}
   - component: {fileID: 891692711}
   - component: {fileID: 891692713}
-  - component: {fileID: 891692712}
   m_Layer: 0
   m_Name: MediumBeam
   m_TagString: Untagged
@@ -1338,19 +1347,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 100
   highlightMaterial: {fileID: 2100000, guid: 4cdef1d9b4d5cdf47a523d865d0d2fdd, type: 2}
-  trainManager: {fileID: 0}
---- !u!75 &891692712
-ConstantForce:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 891692706}
-  m_Enabled: 1
-  m_Force: {x: 0, y: 0, z: 0}
-  m_RelativeForce: {x: 0, y: 0, z: 0}
-  m_Torque: {x: 0, y: 0, z: 0}
-  m_RelativeTorque: {x: 0, y: 0, z: 0}
+  trainManager: {fileID: 1385121211}
 --- !u!54 &891692713
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1621,7 +1618,6 @@ GameObject:
   - component: {fileID: 1215757881}
   - component: {fileID: 1215757885}
   - component: {fileID: 1215757887}
-  - component: {fileID: 1215757886}
   m_Layer: 0
   m_Name: ShortBeam
   m_TagString: Untagged
@@ -1732,19 +1728,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 100
   highlightMaterial: {fileID: 2100000, guid: 4cdef1d9b4d5cdf47a523d865d0d2fdd, type: 2}
-  trainManager: {fileID: 0}
---- !u!75 &1215757886
-ConstantForce:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1215757880}
-  m_Enabled: 1
-  m_Force: {x: 0, y: 0, z: 0}
-  m_RelativeForce: {x: 0, y: 0, z: 0}
-  m_Torque: {x: 0, y: 0, z: 0}
-  m_RelativeTorque: {x: 0, y: 0, z: 0}
+  trainManager: {fileID: 1385121211}
 --- !u!54 &1215757887
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1797,7 +1781,6 @@ GameObject:
   - component: {fileID: 1611506130}
   - component: {fileID: 1611506134}
   - component: {fileID: 1611506136}
-  - component: {fileID: 1611506135}
   m_Layer: 0
   m_Name: LongBeam
   m_TagString: Untagged
@@ -1908,19 +1891,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 100
   highlightMaterial: {fileID: 2100000, guid: 4cdef1d9b4d5cdf47a523d865d0d2fdd, type: 2}
-  trainManager: {fileID: 0}
---- !u!75 &1611506135
-ConstantForce:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1611506129}
-  m_Enabled: 1
-  m_Force: {x: 0, y: 0, z: 0}
-  m_RelativeForce: {x: 0, y: 0, z: 0}
-  m_Torque: {x: 0, y: 0, z: 0}
-  m_RelativeTorque: {x: 0, y: 0, z: 0}
+  trainManager: {fileID: 1385121211}
 --- !u!54 &1611506136
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2244,6 +2215,7 @@ SceneRoots:
   - {fileID: 330585546}
   - {fileID: 410087041}
   - {fileID: 832575519}
+  - {fileID: 407032796}
   - {fileID: 1130730122}
   - {fileID: 98530453}
   - {fileID: 533993045}
@@ -2253,4 +2225,3 @@ SceneRoots:
   - {fileID: 1611506133}
   - {fileID: 1215757884}
   - {fileID: 891692710}
-  - {fileID: 407032796}

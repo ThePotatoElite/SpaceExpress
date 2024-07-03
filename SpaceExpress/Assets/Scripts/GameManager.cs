@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     // public bool BeamMode { get => _beamMode; set => _beamMode = value; }
     /*
-    private void Update()
+    void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
         // SwitchToCinemachineCamera();
     }
     /*
-    private void SwitchToCinemachineCamera()
+    void SwitchToCinemachineCamera()
     {
         mainCamera.SetActive(false);
         cinemachineCamera.gameObject.SetActive(true);

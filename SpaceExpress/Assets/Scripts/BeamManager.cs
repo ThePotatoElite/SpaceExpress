@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class BeamManager : MonoBehaviour
@@ -6,11 +5,10 @@ public class BeamManager : MonoBehaviour
     [SerializeField] float rotationSpeed = 100f;
     [SerializeField] Material highlightMaterial;
     [SerializeField] TrainManager trainManager;
-    private ConstantForce _constantForce;
-    private bool _isDragging = false;
-    private bool _hasRail = false;
     private Vector3 _offset;
     private Vector3 _forceDirection;
+    private bool _isDragging = false;
+    private bool _hasRail = false;
     private Camera _mainCamera;
     private Material _originalMaterial;
     private Renderer _beamRenderer;
@@ -19,7 +17,6 @@ public class BeamManager : MonoBehaviour
     {
         _mainCamera = Camera.main;
         _beamRenderer = GetComponent<Renderer>();
-        _constantForce = GetComponent<ConstantForce>();
         if (_beamRenderer != null)
         {
             _originalMaterial = _beamRenderer.material;
@@ -35,7 +32,7 @@ public class BeamManager : MonoBehaviour
         }
     }
     
-    private void OnMouseDown() // Pickup Beam
+    void OnMouseDown() // Pickup Beam
     {
         if (Input.GetMouseButton(0))
         {
@@ -45,7 +42,7 @@ public class BeamManager : MonoBehaviour
         }
     }
 
-    private void OnMouseUp() // Leave Beam
+    void OnMouseUp() // Leave Beam
     {
         if (Input.GetMouseButtonUp(0))
         {
@@ -54,12 +51,12 @@ public class BeamManager : MonoBehaviour
         }
     }
 
-    private void DragBeam()
+    void DragBeam()
     {
         transform.position = GetMouseWorldPosition() + _offset;
     }
 
-    private void RotateBeam()
+    void RotateBeam()
     {
         if (Input.GetKey(KeyCode.A)) // Rotate Beam counterclockwise
         {
@@ -71,14 +68,14 @@ public class BeamManager : MonoBehaviour
         }
     }
 
-    private Vector3 GetMouseWorldPosition()
+    Vector3 GetMouseWorldPosition()
     {
         Vector3 mouseScreenPosition = Input.mousePosition;
         mouseScreenPosition.z = _mainCamera.WorldToScreenPoint(transform.position).z;
         return _mainCamera.ScreenToWorldPoint(mouseScreenPosition);
     }
     
-    private void HighlightBeam(bool highlight)
+    void HighlightBeam(bool highlight)
     {
         if (_beamRenderer != null)
         {
@@ -86,37 +83,21 @@ public class BeamManager : MonoBehaviour
         }
     }
     
-    private void OnCollisionEnter(Collision other)
+    void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Wheels"))
         {
-            // trainManager.OnRail = true;
             _hasRail = true;
-            StickBeam();
+            trainManager.SetOnRail(_hasRail, transform.position);
         }
     }
 
-    private void OnCollisionExit(Collision other)
+    void OnCollisionExit(Collision other)
     {
         if (other.gameObject.CompareTag("Wheels"))
         {
-            // trainManager.OnRail = false;
             _hasRail = false;
-            StickBeam();
-        }
-    }
-    
-    private void StickBeam()
-    {
-        if (_hasRail)
-        {
-            _forceDirection = new Vector3(0, -100, 0);
-            _constantForce.force = _forceDirection;
-        }
-        else
-        {
-            _forceDirection = new Vector3(0, 0, 0);
-            _constantForce.force = _forceDirection;
+            trainManager.SetOnRail(_hasRail, Vector3.zero);
         }
     }
 }
