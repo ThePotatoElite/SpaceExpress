@@ -1,15 +1,17 @@
-using Unity.VisualScripting;
 using UnityEngine;
-
+// using Cinemachine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] TrainManager _trainManager;
-    [SerializeField] GameObject _beam;
-    private bool beamMode = false;
+    [SerializeField] TrainManager trainManager;
+    // [SerializeField] GameObject mainCamera;
+    // [SerializeField] CinemachineVirtualCamera cinemachineCamera;
+    
+    // [SerializeField] GameObject beam;
+    // private bool _beamMode = false;
 
-    public bool BeamMode { get => beamMode; set => beamMode = value; }
-
+    // public bool BeamMode { get => _beamMode; set => _beamMode = value; }
+    /*
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -17,19 +19,20 @@ public class GameManager : MonoBehaviour
             PointnClick();
         }
     }
+
     public void PointnClick()
     {
         if (BeamMode)
         {
-            Debug.Log("Should Work");
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
-        {
-            Debug.Log("Hit: " + hit.point);
-             GameObject newBeam = Instantiate(_beam);
-           newBeam.transform.position = hit.point;
-        }
+            Debug.Log("Should Work...");
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                Debug.Log("Hit: " + hit.point);
+                GameObject newBeam = Instantiate(beam);
+                newBeam.transform.position = hit.point;
+            }
         }
     }
 
@@ -41,10 +44,17 @@ public class GameManager : MonoBehaviour
         }
         else { BeamMode = true; }
     }
-
+    */
     public void StartDrive()
     {
-        _trainManager.Ready = true;
+        trainManager.Ready = true;
+        // SwitchToCinemachineCamera();
     }
+    /*
+    private void SwitchToCinemachineCamera()
+    {
+        mainCamera.SetActive(false);
+        cinemachineCamera.gameObject.SetActive(true);
+    }
+    */
 }
-
