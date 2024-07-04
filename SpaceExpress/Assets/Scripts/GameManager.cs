@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] TrainManager trainManager;
-    [SerializeField] TextMeshProUGUI Tutorial;
+    [SerializeField] TextMeshProUGUI tutorial;
+    [SerializeField] TextMeshProUGUI wellDone;
     // [SerializeField] GameObject mainCamera;
     // [SerializeField] CinemachineVirtualCamera cinemachineCamera;
     
@@ -14,15 +15,15 @@ public class GameManager : MonoBehaviour
     // private bool _beamMode = false;
 
     // public bool BeamMode { get => _beamMode; set => _beamMode = value; }
-    /*
+
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (TrainManager._levelDone)
         {
-            PointnClick();
+            Celebration();
         }
     }
-
+    /*
     public void PointnClick()
     {
         if (BeamMode)
@@ -50,7 +51,7 @@ public class GameManager : MonoBehaviour
     */
     public void StartDrive()
     {
-        Tutorial.gameObject.SetActive(false);
+        tutorial.gameObject.SetActive(false);
         trainManager.Ready = true;
 
         // SwitchToCinemachineCamera();
@@ -59,6 +60,12 @@ public class GameManager : MonoBehaviour
     public void RestartScene()
     {
         SceneManager.LoadScene(0);
+        wellDone.gameObject.SetActive(false);
+    }
+
+    public void Celebration()
+    {
+        wellDone.gameObject.SetActive(true);
     }
     /*
     void SwitchToCinemachineCamera()

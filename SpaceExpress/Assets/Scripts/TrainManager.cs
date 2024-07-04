@@ -7,7 +7,7 @@ public class TrainManager : MonoBehaviour
     private Vector3 _beamPosition;
     private int _health = 100;
     private bool _ready = false;
-    private bool _levelDone = false;
+    public static bool _levelDone = false;
     public bool _onRail = false;
     
     public bool Ready { get => _ready; set => _ready = value; }
