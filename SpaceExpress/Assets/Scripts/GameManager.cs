@@ -8,9 +8,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] TrainManager trainManager;
     [SerializeField] TextMeshProUGUI tutorial;
     [SerializeField] TextMeshProUGUI wellDone;
+
+    private bool _railMode;
+
+    public bool RailMode { get => _railMode; set => _railMode = value; }
+
     // [SerializeField] GameObject mainCamera;
     // [SerializeField] CinemachineVirtualCamera cinemachineCamera;
-    
+
     // [SerializeField] GameObject beam;
     // private bool _beamMode = false;
 
@@ -62,7 +67,12 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(0);
         wellDone.gameObject.SetActive(false);
     }
-
+    
+    public void EnterRailMode()
+    {
+        if (_railMode) { _railMode = false; }
+        else _railMode = true;
+    }
     public void Celebration()
     {
         wellDone.gameObject.SetActive(true);

@@ -4,7 +4,9 @@ public class BeamManager : MonoBehaviour
 {
     [SerializeField] float rotationSpeed = 100f;
     [SerializeField] Material highlightMaterial;
+    [SerializeField] Material RailMaterial;
     [SerializeField] TrainManager trainManager;
+    [SerializeField] GameManager gameManager;
     private Vector3 _offset;
     private Vector3 _forceDirection;
     private bool _isDragging = false;
@@ -12,7 +14,7 @@ public class BeamManager : MonoBehaviour
     private Camera _mainCamera;
     private Material _originalMaterial;
     private Renderer _beamRenderer;
-    
+
     void Start()
     {
         _mainCamera = Camera.main;
@@ -34,7 +36,18 @@ public class BeamManager : MonoBehaviour
     
     void OnMouseDown() // Pickup Beam
     {
-        if (Input.GetMouseButton(0))
+        if (gameManager.RailMode)
+        {
+            _hasRail = true;
+            Debug.Log("now you are a rail");
+         //   _beamRenderer.material = RailMaterial;
+        }
+        else if (gameManager.RailMode)
+        {
+            _hasRail = false;
+            //beamRenderer.material = _originalMaterial;
+        }
+        else if (Input.GetMouseButton(0))
         {
             _isDragging = true;
             _offset = transform.position - GetMouseWorldPosition();
@@ -82,7 +95,6 @@ public class BeamManager : MonoBehaviour
             _beamRenderer.material = highlight ? highlightMaterial : _originalMaterial;
         }
     }
-    
     void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Wheels"))
