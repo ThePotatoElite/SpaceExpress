@@ -214,8 +214,8 @@ RectTransform:
   m_Children:
   - {fileID: 664984289}
   - {fileID: 669075798}
-  - {fileID: 1747350611}
   - {fileID: 1574966876}
+  - {fileID: 1747350611}
   - {fileID: 634987542}
   - {fileID: 1680056435}
   m_Father: {fileID: 0}
@@ -489,14 +489,54 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7090471076084778047, guid: 78de2f6957a9c494c97b0a3a39561661, type: 3}
+      propertyPath: m_Size.y
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7090471076084778047, guid: 78de2f6957a9c494c97b0a3a39561661, type: 3}
+      propertyPath: m_Center.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7090471076084778047, guid: 78de2f6957a9c494c97b0a3a39561661, type: 3}
+      propertyPath: m_Center.y
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7090471076084778047, guid: 78de2f6957a9c494c97b0a3a39561661, type: 3}
+      propertyPath: m_Center.z
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 8759245182632865367, guid: 78de2f6957a9c494c97b0a3a39561661, type: 3}
+      propertyPath: m_Size.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8759245182632865367, guid: 78de2f6957a9c494c97b0a3a39561661, type: 3}
+      propertyPath: m_Size.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8759245182632865367, guid: 78de2f6957a9c494c97b0a3a39561661, type: 3}
+      propertyPath: m_Size.z
+      value: 70
+      objectReference: {fileID: 0}
     - target: {fileID: 8759245182632865367, guid: 78de2f6957a9c494c97b0a3a39561661, type: 3}
       propertyPath: m_Center.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8759245182632865367, guid: 78de2f6957a9c494c97b0a3a39561661, type: 3}
+      propertyPath: m_Center.z
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8766988651796433531, guid: 78de2f6957a9c494c97b0a3a39561661, type: 3}
       propertyPath: trainRb
       value: 
       objectReference: {fileID: 407032797}
+    - target: {fileID: 8766988651796433531, guid: 78de2f6957a9c494c97b0a3a39561661, type: 3}
+      propertyPath: applySpeed.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8766988651796433531, guid: 78de2f6957a9c494c97b0a3a39561661, type: 3}
+      propertyPath: applySpeed.y
+      value: -1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1498,7 +1538,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 100
   highlightMaterial: {fileID: 2100000, guid: 4cdef1d9b4d5cdf47a523d865d0d2fdd, type: 2}
-  RailMaterial: {fileID: 2100000, guid: 17d374e2f1ba68b44a87ad3f4cc21ed3, type: 2}
+  railMaterial: {fileID: 2100000, guid: 17d374e2f1ba68b44a87ad3f4cc21ed3, type: 2}
   trainManager: {fileID: 1385121211}
   gameManager: {fileID: 320429902}
 --- !u!54 &891692713
@@ -1526,7 +1566,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 4
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!1001 &904585277
 PrefabInstance:
@@ -1881,7 +1921,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 100
   highlightMaterial: {fileID: 2100000, guid: 4cdef1d9b4d5cdf47a523d865d0d2fdd, type: 2}
-  RailMaterial: {fileID: 2100000, guid: 17d374e2f1ba68b44a87ad3f4cc21ed3, type: 2}
+  railMaterial: {fileID: 2100000, guid: 17d374e2f1ba68b44a87ad3f4cc21ed3, type: 2}
   trainManager: {fileID: 1385121211}
   gameManager: {fileID: 320429902}
 --- !u!54 &1215757887
@@ -1909,7 +1949,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 4
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!1 &1302984394
 GameObject:
@@ -2315,7 +2355,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 100
   highlightMaterial: {fileID: 2100000, guid: 4cdef1d9b4d5cdf47a523d865d0d2fdd, type: 2}
-  RailMaterial: {fileID: 2100000, guid: 17d374e2f1ba68b44a87ad3f4cc21ed3, type: 2}
+  railMaterial: {fileID: 2100000, guid: 17d374e2f1ba68b44a87ad3f4cc21ed3, type: 2}
   trainManager: {fileID: 1385121211}
   gameManager: {fileID: 320429902}
 --- !u!54 &1611506136
@@ -2343,7 +2383,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 4
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!1 &1680056434
 GameObject:
@@ -2494,12 +2534,12 @@ GameObject:
   - component: {fileID: 1747350613}
   - component: {fileID: 1747350612}
   m_Layer: 5
-  m_Name: Apply Rail  Button
+  m_Name: Apply Rail Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1747350611
 RectTransform:
   m_ObjectHideFlags: 0

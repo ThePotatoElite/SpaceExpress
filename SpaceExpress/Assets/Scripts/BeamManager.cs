@@ -4,7 +4,7 @@ public class BeamManager : MonoBehaviour
 {
     [SerializeField] float rotationSpeed = 100f;
     [SerializeField] Material highlightMaterial;
-    [SerializeField] Material RailMaterial;
+    [SerializeField] Material railMaterial;
     [SerializeField] TrainManager trainManager;
     [SerializeField] GameManager gameManager;
     private Vector3 _offset;

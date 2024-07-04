@@ -23,13 +23,13 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (TrainManager._levelDone)
+        if (TrainManager.LevelDone)
         {
             Celebration();
         }
     }
     /*
-    public void PointnClick()
+    public void pointAndClick()
     {
         if (BeamMode)
         {
@@ -64,8 +64,9 @@ public class GameManager : MonoBehaviour
 
     public void RestartScene()
     {
-        SceneManager.LoadScene(0);
+        TrainManager.LevelDone = false;
         wellDone.gameObject.SetActive(false);
+        SceneManager.LoadScene(0);
     }
     
     public void EnterRailMode()
@@ -73,7 +74,7 @@ public class GameManager : MonoBehaviour
         if (_railMode) { _railMode = false; }
         else _railMode = true;
     }
-    public void Celebration()
+    void Celebration()
     {
         wellDone.gameObject.SetActive(true);
     }

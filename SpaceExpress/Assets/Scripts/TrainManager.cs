@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class TrainManager : MonoBehaviour
 {
-    [SerializeField] public float speed = 100.0f;
+    private static float _speed = 100.0f;
+    [SerializeField] Vector3 applySpeed = new Vector3(_speed,0f,0f);
     [SerializeField] Rigidbody trainRb;
     private Vector3 _beamPosition;
     private int _health = 100;
     private bool _ready = false;
-    public static bool _levelDone = false;
+    public static bool LevelDone = false;
     public bool _onRail = false;
     
     public bool Ready { get => _ready; set => _ready = value; }
@@ -41,22 +42,26 @@ public class TrainManager : MonoBehaviour
     void MoveTrainOnRail()
     {
         trainRb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
-        transform.Translate(Vector3.forward * (speed * Time.deltaTime));
+        trainRb.linearVelocity = Vector3.forward * _speed;
     }
     
     void MoveTrain()
     {
         //trainRb.constraints = RigidbodyConstraints.None;
         trainRb.constraints = RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
-        transform.Translate(Vector3.forward * (speed * Time.deltaTime));
+        // transform.Translate(Vector3.forward * (speed * Time.deltaTime));
+        trainRb.linearVelocity = applySpeed;
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Flag"))
         {
-            speed = 0; // Stop train when hitting flag
-            _levelDone = true;
+            _speed = 0f; // Stop train when hitting flag
+            applySpeed = new Vector3(_speed, 0f, 0f); // Stop please?
+            trainRb.constraints = RigidbodyConstraints.None; // Allow gravity
+            trainRb.useGravity = true;
+            LevelDone = true;
             Debug.Log("Level completed! Train's HP: " + _health);
         }
 
