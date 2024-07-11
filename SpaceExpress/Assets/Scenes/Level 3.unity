@@ -1205,7 +1205,7 @@ PrefabInstance:
     - target: {fileID: -425565630206218756, guid: 5102a15b4ce39aa4e9ddc355dbd2b1ac, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: c673843be16530241bb64acae778dbad, type: 2}
+      objectReference: {fileID: 2100000, guid: 87909b17dddda06468655de422338d4d, type: 2}
     - target: {fileID: 919132149155446097, guid: 5102a15b4ce39aa4e9ddc355dbd2b1ac, type: 3}
       propertyPath: m_Name
       value: Flag
@@ -1533,7 +1533,7 @@ GameObject:
   - component: {fileID: 1173002739}
   - component: {fileID: 1173002738}
   m_Layer: 5
-  m_Name: Ready Text
+  m_Name: Apply Rail Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

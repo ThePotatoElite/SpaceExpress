@@ -10,9 +10,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI wellDone;
 
     private bool _railMode;
+    private bool _readyButton = false;
 
     public bool RailMode { get => _railMode; set => _railMode = value; }
-
+    public bool ReadyButton { get => _readyButton; set => _readyButton = value; }
+    
     // [SerializeField] GameObject mainCamera;
     // [SerializeField] CinemachineVirtualCamera cinemachineCamera;
 
@@ -58,6 +60,7 @@ public class GameManager : MonoBehaviour
     {
         tutorial.gameObject.SetActive(false);
         trainManager.Ready = true;
+        _readyButton = true;
 
         // SwitchToCinemachineCamera();
     }
@@ -65,8 +68,9 @@ public class GameManager : MonoBehaviour
     public void RestartScene()
     {
         TrainManager.LevelDone = false;
+        _readyButton = false;
         wellDone.gameObject.SetActive(false);
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     
     public void EnterRailMode()
@@ -76,6 +80,7 @@ public class GameManager : MonoBehaviour
     }
     void Celebration()
     {
+        _readyButton = false;
         wellDone.gameObject.SetActive(true);
     }
     /*

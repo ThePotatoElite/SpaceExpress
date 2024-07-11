@@ -36,22 +36,25 @@ public class BeamManager : MonoBehaviour
     
     void OnMouseDown() // Pickup Beam
     {
-        if (gameManager.RailMode)
+        if (!gameManager.ReadyButton)
         {
-            _hasRail = true;
-            Debug.Log("now you are a rail");
-         //   _beamRenderer.material = RailMaterial;
-        }
-        else if (gameManager.RailMode)
-        {
-            _hasRail = false;
-            //beamRenderer.material = _originalMaterial;
-        }
-        else if (Input.GetMouseButton(0))
-        {
-            _isDragging = true;
-            _offset = transform.position - GetMouseWorldPosition();
-            HighlightBeam(true);
+            if (gameManager.RailMode)
+            {
+                _hasRail = true;
+                Debug.Log("now you are a rail");
+                //   _beamRenderer.material = RailMaterial;
+            }
+            else if (gameManager.RailMode)
+            {
+                _hasRail = false;
+                //beamRenderer.material = _originalMaterial;
+            }
+            else if (Input.GetMouseButton(0))
+            {
+                _isDragging = true;
+                _offset = transform.position - GetMouseWorldPosition();
+                HighlightBeam(true);
+            }
         }
     }
 
@@ -71,13 +74,17 @@ public class BeamManager : MonoBehaviour
 
     void RotateBeam()
     {
-        if (Input.GetKey(KeyCode.A)) // Rotate Beam counterclockwise
+        if (!gameManager.ReadyButton)
         {
-            transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.D)) // Rotate Beam clockwise
-        {
-            transform.Rotate(Vector3.forward, -rotationSpeed * Time.deltaTime);
+            if (Input.GetKey(KeyCode.A)) // Rotate Beam counterclockwise
+            {
+                transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
+            }
+
+            if (Input.GetKey(KeyCode.D)) // Rotate Beam clockwise
+            {
+                transform.Rotate(Vector3.forward, -rotationSpeed * Time.deltaTime);
+            }
         }
     }
 
