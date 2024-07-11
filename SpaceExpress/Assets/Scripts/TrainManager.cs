@@ -63,6 +63,8 @@ public class TrainManager : MonoBehaviour
             trainRb.useGravity = true;
             LevelDone = true;
             Debug.Log("Level completed! Train's HP: " + _health);
+            SceneLoader.LoadNextScene();
+            LevelDone = false;
         }
 
         /*
