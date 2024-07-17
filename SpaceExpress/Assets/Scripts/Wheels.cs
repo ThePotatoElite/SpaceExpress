@@ -2,15 +2,14 @@ using UnityEngine;
 
 public class Wheels : MonoBehaviour
 {
-    [SerializeField] GameObject Cart;
+    [SerializeField] GameObject cart;
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Rail")
+        if (other.gameObject.CompareTag("Rail"))
         {
-          //  Cart.transform.Rotate(other.transform.rotation.eulerAngles);
-            Debug.Log($"{Cart.name} Should be rotating");
+            // Cart.transform.Rotate(other.transform.rotation.eulerAngles);
+            Debug.Log($"{cart.name} Should be rotating");
         }
-        else { Debug.Log("What is happening"); }
+        else { Debug.Log("What is happening?"); }
     }
-
 }

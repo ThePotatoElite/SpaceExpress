@@ -8,12 +8,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] TrainManager trainManager;
     [SerializeField] TextMeshProUGUI tutorial;
     [SerializeField] TextMeshProUGUI wellDone;
-
-
+    
     public Vector3 gravity;
     private bool _driveMode = false;
     public bool DriveMode { get => _driveMode; set => _driveMode = value; }
-
 
     // [SerializeField] GameObject mainCamera;
     // [SerializeField] CinemachineVirtualCamera cinemachineCamera;
@@ -33,7 +31,6 @@ public class GameManager : MonoBehaviour
         tutorial.gameObject.SetActive(false);
         trainManager.Ready = true;
         _driveMode = true;
-
         // SwitchToCinemachineCamera();
     }
 

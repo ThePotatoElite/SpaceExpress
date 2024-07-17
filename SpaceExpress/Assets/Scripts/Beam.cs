@@ -64,12 +64,12 @@ public class Beam : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.A)) // Rotate Beam counterclockwise
             {
-                transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
+                transform.Rotate(Vector3.right, rotationSpeed * Time.deltaTime);
             }
 
             if (Input.GetKey(KeyCode.D)) // Rotate Beam clockwise
             {
-                transform.Rotate(Vector3.forward, -rotationSpeed * Time.deltaTime);
+                transform.Rotate(Vector3.right, -rotationSpeed * Time.deltaTime);
             }
         }
     }
@@ -88,5 +88,4 @@ public class Beam : MonoBehaviour
             _beamRenderer.material = highlight ? highlightMaterial : _originalMaterial;
         }
     }
-   
 }

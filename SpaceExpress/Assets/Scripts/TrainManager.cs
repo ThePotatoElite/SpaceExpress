@@ -3,17 +3,15 @@ using System.Collections.Generic;
 
 public class TrainManager : MonoBehaviour
 {
-    public Vector3 Speed;
     private static float _speed = 100.0f;
-   [SerializeField] Vector3 applySpeed = new Vector3(_speed,0f,0f);
+    [SerializeField] Vector3 applySpeed = new Vector3(_speed,0f,0f);
     [SerializeField] Rigidbody trainRb;
     private Vector3 _beamPosition;
-    private int _health = 100;
+    private readonly int _health = 100;
     private bool _ready = false;
-    public static bool LevelDone = false;
+    private bool _hasStarted = false;
     public bool _onRail = false;
-
-    bool _hasStarted = false;
+    public static bool LevelDone = false;
     
     public bool Ready { get => _ready; set => _ready = value; }
     public bool OnRail { get => _onRail; set => _onRail = value; }
@@ -32,11 +30,12 @@ public class TrainManager : MonoBehaviour
         }
     }
     
-    public void StartRide()
+    void StartRide()
     {
         _hasStarted = true;
         trainRb.linearVelocity = applySpeed;
     }
+    
     public void SetOnRail(bool onRail, Vector3 beamPosition)
     {
         _onRail = onRail;
@@ -53,8 +52,10 @@ public class TrainManager : MonoBehaviour
 
     void MoveTrainOnRail()
     {
-       /* trainRb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
-        trainRb.linearVelocity = Vector3.forward * _speed;*/
+        /*
+        trainRb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
+        trainRb.linearVelocity = Vector3.forward * _speed;
+        */
     }
     
     void MoveTrain()
@@ -62,7 +63,7 @@ public class TrainManager : MonoBehaviour
         //trainRb.constraints = RigidbodyConstraints.None;
         trainRb.constraints = RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
         // transform.Translate(Vector3.forward * (speed * Time.deltaTime));
-       // trainRb.linearVelocity = applySpeed + Vector3.down * 1f; // Apply space-like gravity
+        // trainRb.linearVelocity = applySpeed + Vector3.down * 1f; // Apply space-like gravity
     }
 
     void OnTriggerEnter(Collider other)
@@ -70,15 +71,13 @@ public class TrainManager : MonoBehaviour
         if (other.CompareTag("Flag"))
         {
             _speed = 0f; // Stop train when hitting flag
-         //   applySpeed = new Vector3(_speed, 0f, 0f); // Stop now!
+            // applySpeed = new Vector3(_speed, 0f, 0f); // Stop now!
             trainRb.constraints = RigidbodyConstraints.None; // Allow gravity
             trainRb.useGravity = true;
             LevelDone = true;
             Debug.Log("Level completed! Train's HP: " + _health);
             StartCoroutine(LoadNextSceneWithDelay());
         }
-       
-
         /*
         else if (other.CompareTag("Obstacle"))
         {
@@ -89,7 +88,7 @@ public class TrainManager : MonoBehaviour
         */
     }
     
-    private IEnumerator<WaitForSeconds> LoadNextSceneWithDelay()
+    IEnumerator<WaitForSeconds> LoadNextSceneWithDelay()
     {
         yield return new WaitForSeconds(2); // Wait for 2 seconds before next level
         SceneLoader.LoadNextScene();

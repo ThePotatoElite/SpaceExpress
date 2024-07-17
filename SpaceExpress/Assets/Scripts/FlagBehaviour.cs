@@ -10,9 +10,9 @@ public class FlagBehaviour : MonoBehaviour
         }
     }
 
-    void LevelPassed() // Should change to what should actully happen when you hit the flag
+    void LevelPassed() // Should change to what actually happens when you hit the flag
     {
-        Destroy(this.gameObject);
-       // Insert Win Logic
+        Destroy(gameObject);
+       // Insert Win Logic Later
     }
 }

@@ -2,19 +2,18 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    [SerializeField] Rigidbody rb;
+    [SerializeField] Rigidbody ballRb;
     public Vector3 gravity;
-
-    public Vector3 Speed;
+    public Vector3 ballSpeed;
+    
     void Start()
     {
         Physics.gravity = gravity;
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
-        Speed = rb.linearVelocity;
+        ballSpeed = ballRb.linearVelocity;
         Physics.gravity = gravity;
     }
 }
