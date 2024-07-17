@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 public class TrainManager : MonoBehaviour
@@ -52,7 +51,7 @@ public class TrainManager : MonoBehaviour
         //trainRb.constraints = RigidbodyConstraints.None;
         trainRb.constraints = RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
         // transform.Translate(Vector3.forward * (speed * Time.deltaTime));
-        trainRb.linearVelocity = applySpeed;
+        trainRb.linearVelocity = applySpeed + Vector3.down * 1f; // Apply space-like gravity
     }
 
     void OnTriggerEnter(Collider other)
