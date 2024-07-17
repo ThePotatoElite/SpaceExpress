@@ -7,6 +7,7 @@ TagManager:
   - Flag
   - Wheels
   - Ball
+  - Rail
   layers:
   - Default
   - TransparentFX
