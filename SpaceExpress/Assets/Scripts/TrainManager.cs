@@ -4,24 +4,27 @@ using System.Collections.Generic;
 public class TrainManager : MonoBehaviour
 {
     public Vector3 Speed;
-    [SerializeField] GameObject train;
     private static float _speed = 100.0f;
-    [SerializeField] Vector3 applySpeed = new Vector3(_speed,0f,0f);
+   [SerializeField] Vector3 applySpeed = new Vector3(_speed,0f,0f);
     [SerializeField] Rigidbody trainRb;
     private Vector3 _beamPosition;
     private int _health = 100;
     private bool _ready = false;
     public static bool LevelDone = false;
     public bool _onRail = false;
+
+    bool _hasStarted = false;
     
     public bool Ready { get => _ready; set => _ready = value; }
     public bool OnRail { get => _onRail; set => _onRail = value; }
 
     void Update()
     {
-        Speed = trainRb.linearVelocity;
         if (Ready)
         {
+            if (!_hasStarted)
+            { StartRide(); _hasStarted = true; }
+
             if (!OnRail)
             { MoveTrain(); }
             else if (OnRail)
@@ -29,6 +32,11 @@ public class TrainManager : MonoBehaviour
         }
     }
     
+    public void StartRide()
+    {
+        _hasStarted = true;
+        trainRb.linearVelocity = applySpeed;
+    }
     public void SetOnRail(bool onRail, Vector3 beamPosition)
     {
         _onRail = onRail;
@@ -45,8 +53,8 @@ public class TrainManager : MonoBehaviour
 
     void MoveTrainOnRail()
     {
-        trainRb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
-        trainRb.linearVelocity = Vector3.forward * _speed;
+       /* trainRb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
+        trainRb.linearVelocity = Vector3.forward * _speed;*/
     }
     
     void MoveTrain()
@@ -54,15 +62,7 @@ public class TrainManager : MonoBehaviour
         //trainRb.constraints = RigidbodyConstraints.None;
         trainRb.constraints = RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
         // transform.Translate(Vector3.forward * (speed * Time.deltaTime));
-        trainRb.linearVelocity = applySpeed + Vector3.down * 1f; // Apply space-like gravity
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ball"))
-        {
-            Destroy(train); // should delete
-        }
+       // trainRb.linearVelocity = applySpeed + Vector3.down * 1f; // Apply space-like gravity
     }
 
     void OnTriggerEnter(Collider other)
@@ -70,7 +70,7 @@ public class TrainManager : MonoBehaviour
         if (other.CompareTag("Flag"))
         {
             _speed = 0f; // Stop train when hitting flag
-            applySpeed = new Vector3(_speed, 0f, 0f); // Stop now!
+         //   applySpeed = new Vector3(_speed, 0f, 0f); // Stop now!
             trainRb.constraints = RigidbodyConstraints.None; // Allow gravity
             trainRb.useGravity = true;
             LevelDone = true;

@@ -9,10 +9,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI tutorial;
     [SerializeField] TextMeshProUGUI wellDone;
 
-    private bool _setRailMode;
-    private bool _driveMode = false;
 
-    public bool SetRailMode { get => _setRailMode; set => _setRailMode = value; }
+    public Vector3 gravity;
+    private bool _driveMode = false;
     public bool DriveMode { get => _driveMode; set => _driveMode = value; }
 
 
@@ -21,6 +20,8 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        Physics.gravity = gravity;
+
         if (TrainManager.LevelDone)
         {
             Celebration();
@@ -43,12 +44,7 @@ public class GameManager : MonoBehaviour
         wellDone.gameObject.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-    
-    public void EnterRailMode()
-    {
-        if (_setRailMode) { _setRailMode = false; }
-        else _setRailMode = true;
-    }
+
     void Celebration()
     {
         _driveMode = false;
