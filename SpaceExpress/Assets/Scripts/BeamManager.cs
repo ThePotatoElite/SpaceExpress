@@ -102,6 +102,7 @@ public class BeamManager : MonoBehaviour
             _beamRenderer.material = highlight ? highlightMaterial : _originalMaterial;
         }
     }
+    
     void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Wheels"))

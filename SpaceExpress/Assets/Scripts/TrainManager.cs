@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class TrainManager : MonoBehaviour
 {
@@ -58,13 +60,12 @@ public class TrainManager : MonoBehaviour
         if (other.CompareTag("Flag"))
         {
             _speed = 0f; // Stop train when hitting flag
-            applySpeed = new Vector3(_speed, 0f, 0f); // Stop please?
+            applySpeed = new Vector3(_speed, 0f, 0f); // Stop now!
             trainRb.constraints = RigidbodyConstraints.None; // Allow gravity
             trainRb.useGravity = true;
             LevelDone = true;
             Debug.Log("Level completed! Train's HP: " + _health);
-            SceneLoader.LoadNextScene();
-            LevelDone = false;
+            StartCoroutine(LoadNextSceneWithDelay());
         }
 
         /*
@@ -75,5 +76,12 @@ public class TrainManager : MonoBehaviour
             Debug.Log("Train's HP: " + _health + "\n" + "Train's Speed: " + speed);
         }
         */
+    }
+    
+    private IEnumerator<WaitForSeconds> LoadNextSceneWithDelay()
+    {
+        yield return new WaitForSeconds(2); // Wait for 2 seconds before next level
+        SceneLoader.LoadNextScene();
+        LevelDone = false;
     }
 }
