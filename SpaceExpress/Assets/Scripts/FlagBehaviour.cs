@@ -6,12 +6,13 @@ public class FlagBehaviour : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            DestroyFlag();
+            LevelPassed();
         }
     }
 
-    void DestroyFlag()
+    void LevelPassed() // Should change to what should actully happen when you hit the flag
     {
-        Destroy(gameObject);
+        Destroy(this.gameObject);
+       // Insert Win Logic
     }
 }

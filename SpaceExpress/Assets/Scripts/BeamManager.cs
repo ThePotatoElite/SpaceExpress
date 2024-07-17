@@ -36,15 +36,15 @@ public class BeamManager : MonoBehaviour
     
     void OnMouseDown() // Pickup Beam
     {
-        if (!gameManager.ReadyButton)
+        if (!gameManager.DriveMode)
         {
-            if (gameManager.RailMode)
+            if (gameManager.SetRailMode)
             {
                 _hasRail = true;
                 Debug.Log("now you are a rail");
                 //   _beamRenderer.material = RailMaterial;
             }
-            else if (gameManager.RailMode)
+            else if (gameManager.SetRailMode)
             {
                 _hasRail = false;
                 //beamRenderer.material = _originalMaterial;
@@ -74,7 +74,7 @@ public class BeamManager : MonoBehaviour
 
     void RotateBeam()
     {
-        if (!gameManager.ReadyButton)
+        if (!gameManager.DriveMode)
         {
             if (Input.GetKey(KeyCode.A)) // Rotate Beam counterclockwise
             {

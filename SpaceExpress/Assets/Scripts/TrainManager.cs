@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 public class TrainManager : MonoBehaviour
 {
+    public Vector3 Speed;
+    [SerializeField] GameObject train;
     private static float _speed = 100.0f;
     [SerializeField] Vector3 applySpeed = new Vector3(_speed,0f,0f);
     [SerializeField] Rigidbody trainRb;
@@ -17,6 +19,7 @@ public class TrainManager : MonoBehaviour
 
     void Update()
     {
+        Speed = trainRb.linearVelocity;
         if (Ready)
         {
             if (!OnRail)
@@ -54,6 +57,14 @@ public class TrainManager : MonoBehaviour
         trainRb.linearVelocity = applySpeed + Vector3.down * 1f; // Apply space-like gravity
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ball"))
+        {
+            Destroy(train); // should delete
+        }
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Flag"))
@@ -66,6 +77,7 @@ public class TrainManager : MonoBehaviour
             Debug.Log("Level completed! Train's HP: " + _health);
             StartCoroutine(LoadNextSceneWithDelay());
         }
+       
 
         /*
         else if (other.CompareTag("Obstacle"))

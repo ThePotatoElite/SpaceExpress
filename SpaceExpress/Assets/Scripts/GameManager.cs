@@ -9,19 +9,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI tutorial;
     [SerializeField] TextMeshProUGUI wellDone;
 
-    private bool _railMode;
-    private bool _readyButton = false;
+    private bool _setRailMode;
+    private bool _driveMode = false;
 
-    public bool RailMode { get => _railMode; set => _railMode = value; }
-    public bool ReadyButton { get => _readyButton; set => _readyButton = value; }
-    
+    public bool SetRailMode { get => _setRailMode; set => _setRailMode = value; }
+    public bool DriveMode { get => _driveMode; set => _driveMode = value; }
+
+
     // [SerializeField] GameObject mainCamera;
     // [SerializeField] CinemachineVirtualCamera cinemachineCamera;
-
-    // [SerializeField] GameObject beam;
-    // private bool _beamMode = false;
-
-    // public bool BeamMode { get => _beamMode; set => _beamMode = value; }
 
     void Update()
     {
@@ -30,37 +26,12 @@ public class GameManager : MonoBehaviour
             Celebration();
         }
     }
-    /*
-    public void pointAndClick()
-    {
-        if (BeamMode)
-        {
-            Debug.Log("Should Work...");
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
-            {
-                Debug.Log("Hit: " + hit.point);
-                GameObject newBeam = Instantiate(beam);
-                newBeam.transform.position = hit.point;
-            }
-        }
-    }
 
-    public void EnableBeam()
-    {
-        if (BeamMode)
-        {
-            BeamMode = false;
-        }
-        else { BeamMode = true; }
-    }
-    */
-    public void StartDrive()
+    public void StartDriveMode()
     {
         tutorial.gameObject.SetActive(false);
         trainManager.Ready = true;
-        _readyButton = true;
+        _driveMode = true;
 
         // SwitchToCinemachineCamera();
     }
@@ -68,19 +39,19 @@ public class GameManager : MonoBehaviour
     public void RestartScene()
     {
         TrainManager.LevelDone = false;
-        _readyButton = false;
+        _driveMode = false;
         wellDone.gameObject.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     
     public void EnterRailMode()
     {
-        if (_railMode) { _railMode = false; }
-        else _railMode = true;
+        if (_setRailMode) { _setRailMode = false; }
+        else _setRailMode = true;
     }
     void Celebration()
     {
-        _readyButton = false;
+        _driveMode = false;
         wellDone.gameObject.SetActive(true);
     }
     /*
