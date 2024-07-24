@@ -6,8 +6,9 @@ public class Beam : MonoBehaviour
     [SerializeField] Material highlightMaterial;
     [SerializeField] GameManager gameManager;
     private Vector3 _offset;
-    private Vector3 _forceDirection;
+    // private Vector3 _forceDirection;
     private bool _isDragging = false;
+    private bool _isCollidingWithBeam = false;
     private Camera _mainCamera;
     private Material _originalMaterial;
     private Renderer _beamRenderer;
@@ -55,19 +56,22 @@ public class Beam : MonoBehaviour
 
     void DragBeam()
     {
-        transform.position = GetMouseWorldPosition() + _offset;
+        if (!_isCollidingWithBeam)
+        {
+            transform.position = GetMouseWorldPosition() + _offset;
+        }
     }
 
     void RotateBeam()
     {
         if (!gameManager.DriveMode)
         {
-            if (Input.GetKey(KeyCode.A)) // Rotate Beam counterclockwise
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) // Rotate Beam counterclockwise
             {
                 transform.Rotate(Vector3.right, rotationSpeed * Time.deltaTime);
             }
 
-            if (Input.GetKey(KeyCode.D)) // Rotate Beam clockwise
+            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) // Rotate Beam clockwise
             {
                 transform.Rotate(Vector3.right, -rotationSpeed * Time.deltaTime);
             }
@@ -86,6 +90,30 @@ public class Beam : MonoBehaviour
         if (_beamRenderer != null)
         {
             _beamRenderer.material = highlight ? highlightMaterial : _originalMaterial;
+        }
+    }
+    
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Beam"))
+        {
+            _isCollidingWithBeam = true;
+        }
+    }
+    
+    void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Beam"))
+        {
+            _isCollidingWithBeam = true;
+        }
+    }
+    
+    void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Beam"))
+        {
+            _isCollidingWithBeam = false;
         }
     }
 }

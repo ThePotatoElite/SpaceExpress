@@ -3,10 +3,13 @@ using System.Collections.Generic;
 
 public class TrainManager : MonoBehaviour
 {
-    private static float _speed = 100.0f;
-    [SerializeField] Vector3 applySpeed = new Vector3(_speed,0f,0f);
+    private float _speed;
+    [SerializeField] public Vector3 applySpeed;
     [SerializeField] Rigidbody trainRb;
-    private Vector3 _beamPosition;
+    // private Vector3 _beamPosition;
+    private Vector3 _initialTrainPosition;
+    private Quaternion _initialTrainRotation;
+    public float initialSpeed;
     private readonly int _health = 100;
     private bool _ready = false;
     private bool _hasStarted = false;
@@ -15,6 +18,14 @@ public class TrainManager : MonoBehaviour
     
     public bool Ready { get => _ready; set => _ready = value; }
     public bool OnRail { get => _onRail; set => _onRail = value; }
+    
+    void Start()
+    {
+        _initialTrainPosition = transform.position;
+        _initialTrainRotation = transform.rotation;
+        initialSpeed = applySpeed.x;
+        _speed = initialSpeed;
+    }
 
     void Update()
     {
@@ -26,7 +37,8 @@ public class TrainManager : MonoBehaviour
             if (!OnRail)
             { MoveTrain(); }
             else if (OnRail)
-            {   Debug.Log("On Rail"); // Not Working
+            {
+                Debug.Log("On Rail"); // Not Working
                 MoveTrainOnRail();
             }
         }
@@ -38,10 +50,10 @@ public class TrainManager : MonoBehaviour
         trainRb.linearVelocity = applySpeed;
     }
     
-    public void SetOnRail(bool onRail, Vector3 beamPosition)
+    public void SetOnRail(bool onRail/*, Vector3 beamPosition*/)
     {
         _onRail = onRail;
-        _beamPosition = beamPosition;
+        // _beamPosition = beamPosition;
         if (onRail)
         {
             trainRb.AddForce(Vector3.down * 10f, ForceMode.Acceleration); // Apply Beam Force
@@ -55,7 +67,7 @@ public class TrainManager : MonoBehaviour
     void MoveTrainOnRail()
     {
         /*
-        trainRb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
+        trainRb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionY;
         trainRb.linearVelocity = Vector3.forward * _speed;
         */
     }
@@ -95,5 +107,18 @@ public class TrainManager : MonoBehaviour
         yield return new WaitForSeconds(2); // Wait for 2 seconds before next level
         SceneLoader.LoadNextScene();
         LevelDone = false;
+    }
+    
+    public void ResetTrain()
+    {
+        transform.position = _initialTrainPosition;
+        transform.rotation = _initialTrainRotation;
+        _hasStarted = false;
+        trainRb.linearVelocity = Vector3.zero;
+        _speed = initialSpeed;
+        applySpeed = new Vector3(_speed, 0f, 0f);
+        Ready = false;
+        OnRail = false;
+        trainRb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
     }
 }

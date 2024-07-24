@@ -19,7 +19,6 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         Physics.gravity = gravity;
-
         if (TrainManager.LevelDone)
         {
             Celebration();
@@ -30,6 +29,7 @@ public class GameManager : MonoBehaviour
     {
         tutorial.gameObject.SetActive(false);
         trainManager.Ready = true;
+        trainManager.applySpeed = new Vector3(trainManager.initialSpeed, 0f, 0f);
         _driveMode = true;
         // SwitchToCinemachineCamera();
     }
@@ -39,8 +39,16 @@ public class GameManager : MonoBehaviour
         TrainManager.LevelDone = false;
         _driveMode = false;
         wellDone.gameObject.SetActive(false);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        trainManager.ResetTrain();
+        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+    
+    /*
+    public void EnterRailMode()
+    {
+        _railMode = !_railMode;
+    }
+    */
 
     void Celebration()
     {

@@ -8,6 +8,7 @@ TagManager:
   - Wheels
   - Ball
   - Rail
+  - Beam
   layers:
   - Default
   - TransparentFX
