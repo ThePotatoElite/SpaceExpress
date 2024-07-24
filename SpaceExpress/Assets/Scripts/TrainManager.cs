@@ -26,7 +26,9 @@ public class TrainManager : MonoBehaviour
             if (!OnRail)
             { MoveTrain(); }
             else if (OnRail)
-            { MoveTrainOnRail(); }
+            {   Debug.Log("On Rail"); // Not Working
+                MoveTrainOnRail();
+            }
         }
     }
     
@@ -61,7 +63,7 @@ public class TrainManager : MonoBehaviour
     void MoveTrain()
     {
         //trainRb.constraints = RigidbodyConstraints.None;
-        trainRb.constraints = RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
+        trainRb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
         // transform.Translate(Vector3.forward * (speed * Time.deltaTime));
         // trainRb.linearVelocity = applySpeed + Vector3.down * 1f; // Apply space-like gravity
     }
