@@ -8,9 +8,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] TrainManager trainManager;
     [SerializeField] TextMeshProUGUI tutorial;
     [SerializeField] TextMeshProUGUI wellDone;
+    // [SerializeField] GameObject beamPrefab;
     
     public Vector3 gravity;
     private bool _driveMode = false;
+    // private bool _isPlacingBeam = false;
+    // private GameObject _currentBeam;
     public bool DriveMode { get => _driveMode; set => _driveMode = value; }
 
     // [SerializeField] GameObject mainCamera;
@@ -23,6 +26,18 @@ public class GameManager : MonoBehaviour
         {
             Celebration();
         }
+        /*
+        if (_isPlacingBeam && _currentBeam != null)
+        {
+            FollowMouse(_currentBeam);
+            RotateBeam(_currentBeam);
+        }
+
+        if (_isPlacingBeam && Input.GetMouseButtonDown(0))
+        {
+            PlaceBeam();
+        }
+        */
     }
 
     public void StartDriveMode()
@@ -54,6 +69,38 @@ public class GameManager : MonoBehaviour
     {
         _driveMode = false;
         wellDone.gameObject.SetActive(true);
+    }
+    /*
+    public void SpawnBeam()
+    {
+        _currentBeam = Instantiate(beamPrefab);
+        _isPlacingBeam = true;
+    }
+    
+    void FollowMouse(GameObject beam)
+    {
+        Vector3 mouseScreenPosition = Input.mousePosition;
+        mouseScreenPosition.z = Camera.main.WorldToScreenPoint(beam.transform.position).z;
+        beam.transform.position = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
+    }
+    
+    void RotateBeam(GameObject beam)
+    {
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        {
+            beam.transform.Rotate(Vector3.right, 100f * Time.deltaTime);
+        }
+
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        {
+            beam.transform.Rotate(Vector3.right, -100f * Time.deltaTime);
+        }
+    }
+    
+    void PlaceBeam()
+    {
+        _isPlacingBeam = false;
+        _currentBeam = null;
     }
     /*
     void SwitchToCinemachineCamera()
