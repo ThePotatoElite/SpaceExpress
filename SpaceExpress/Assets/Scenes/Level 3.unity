@@ -894,8 +894,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trainManager: {fileID: 1449572945}
-  tutorial: {fileID: 0}
-  wellDone: {fileID: 0}
+  tutorial: {fileID: 246181912}
+  wellDone: {fileID: 326969175}
+  beamPrefab: {fileID: 8261746753377488882, guid: bc04f20141b6f5a41bd13b7b11db3ba5, type: 3}
   gravity: {x: 0, y: -5, z: 0}
 --- !u!1 &326969173
 GameObject:
@@ -4458,13 +4459,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 320429900}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: 
+      - m_Target: {fileID: 320429902}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: SpawnBeam
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

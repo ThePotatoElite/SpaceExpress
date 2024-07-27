@@ -1003,6 +1003,7 @@ MonoBehaviour:
   trainManager: {fileID: 1308623514}
   tutorial: {fileID: 286246791}
   wellDone: {fileID: 1392677926}
+  beamPrefab: {fileID: 8261746753377488882, guid: bc04f20141b6f5a41bd13b7b11db3ba5, type: 3}
   gravity: {x: 0, y: -5, z: 0}
 --- !u!1 &330585543
 GameObject:
@@ -4784,7 +4785,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 320429902}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: SpawnBeam
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -8,12 +8,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] TrainManager trainManager;
     [SerializeField] TextMeshProUGUI tutorial;
     [SerializeField] TextMeshProUGUI wellDone;
-    // [SerializeField] GameObject beamPrefab;
+    [SerializeField] GameObject beamPrefab;
     
     public Vector3 gravity;
     private bool _driveMode = false;
-    // private bool _isPlacingBeam = false;
-    // private GameObject _currentBeam;
+    private bool _isPlacingBeam = false;
+    private GameObject _currentBeam;
     public bool DriveMode { get => _driveMode; set => _driveMode = value; }
 
     // [SerializeField] GameObject mainCamera;
@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
         {
             Celebration();
         }
-        /*
+        
         if (_isPlacingBeam && _currentBeam != null)
         {
             FollowMouse(_currentBeam);
@@ -37,7 +37,6 @@ public class GameManager : MonoBehaviour
         {
             PlaceBeam();
         }
-        */
     }
 
     public void StartDriveMode()
@@ -70,7 +69,7 @@ public class GameManager : MonoBehaviour
         _driveMode = false;
         wellDone.gameObject.SetActive(true);
     }
-    /*
+
     public void SpawnBeam()
     {
         _currentBeam = Instantiate(beamPrefab);

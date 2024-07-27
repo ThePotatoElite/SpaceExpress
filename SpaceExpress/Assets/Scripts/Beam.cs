@@ -12,6 +12,7 @@ public class Beam : MonoBehaviour
     private Camera _mainCamera;
     private Material _originalMaterial;
     private Renderer _beamRenderer;
+    private bool _isPlacing = false;
 
     void Start()
     {
@@ -29,6 +30,14 @@ public class Beam : MonoBehaviour
         {
             DragBeam();
             RotateBeam();
+        }
+        if (_isPlacing)
+        {
+            HighlightBeam(true);
+        }
+        else
+        {
+            HighlightBeam(false);
         }
     }
     
@@ -91,6 +100,11 @@ public class Beam : MonoBehaviour
         {
             _beamRenderer.material = highlight ? highlightMaterial : _originalMaterial;
         }
+    }
+    
+    public void SetPlacing(bool isPlacing)
+    {
+        _isPlacing = isPlacing;
     }
     
     void OnCollisionEnter(Collision collision)
