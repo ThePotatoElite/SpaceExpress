@@ -1003,7 +1003,6 @@ MonoBehaviour:
   trainManager: {fileID: 1308623514}
   tutorial: {fileID: 286246791}
   wellDone: {fileID: 1392677926}
-  beamPrefab: {fileID: 8261746753377488882, guid: bc04f20141b6f5a41bd13b7b11db3ba5, type: 3}
   gravity: {x: 0, y: -5, z: 0}
 --- !u!1 &330585543
 GameObject:
@@ -2210,7 +2209,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: f71234e6139fbea46874badf4576bc1c, type: 3}
+  m_Texture: {fileID: 2800000, guid: 44f43acabab9c5c49b66049d40c320ec, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -4785,7 +4784,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 320429902}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: SpawnBeam
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

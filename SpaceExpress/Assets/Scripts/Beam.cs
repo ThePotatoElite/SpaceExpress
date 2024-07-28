@@ -12,7 +12,7 @@ public class Beam : MonoBehaviour
     private Camera _mainCamera;
     private Material _originalMaterial;
     private Renderer _beamRenderer;
-    private bool _isPlacing = false;
+    // private bool _isPlacing = false;
 
     void Start()
     {
@@ -31,6 +31,7 @@ public class Beam : MonoBehaviour
             DragBeam();
             RotateBeam();
         }
+        /*
         if (_isPlacing)
         {
             HighlightBeam(true);
@@ -39,6 +40,7 @@ public class Beam : MonoBehaviour
         {
             HighlightBeam(false);
         }
+        */
     }
     
     void OnMouseDown() // Pickup Beam
@@ -96,16 +98,17 @@ public class Beam : MonoBehaviour
     
     void HighlightBeam(bool highlight)
     {
-        if (_beamRenderer != null)
+        if (_beamRenderer)
         {
             _beamRenderer.material = highlight ? highlightMaterial : _originalMaterial;
         }
     }
-    
+    /*
     public void SetPlacing(bool isPlacing)
     {
         _isPlacing = isPlacing;
     }
+    */
     
     void OnCollisionEnter(Collision collision)
     {
@@ -114,7 +117,7 @@ public class Beam : MonoBehaviour
             _isCollidingWithBeam = true;
         }
     }
-    
+    /*
     void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.CompareTag("Beam"))
@@ -122,6 +125,7 @@ public class Beam : MonoBehaviour
             _isCollidingWithBeam = true;
         }
     }
+    */
     
     void OnCollisionExit(Collision collision)
     {
