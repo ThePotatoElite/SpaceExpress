@@ -1,5 +1,7 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 // using Cinemachine;
 
 public class GameManager : MonoBehaviour
@@ -55,6 +57,15 @@ public class GameManager : MonoBehaviour
         wellDone.gameObject.SetActive(false);
         trainManager.ResetTrain();
         // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    
+    public void Rewind()
+    {
+        TrainManager.LevelDone = false;
+        _driveMode = false;
+        wellDone.gameObject.SetActive(false);
+        trainManager.ResetTrain();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     
     /*
