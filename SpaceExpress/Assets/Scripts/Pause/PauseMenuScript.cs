@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class PauseMenuScript : MonoBehaviour
 {
@@ -11,24 +9,14 @@ public class PauseMenuScript : MonoBehaviour
     
     public void Pause()
     {
-        GameState currentGameState = GameStateManager.Instance.CurrentGameState;
-        GameState newGameState = currentGameState == GameState.Gameplay
-            ? GameState.Pause
-            : GameState.Gameplay;
-
-        GameStateManager.Instance.SetState(newGameState);
+        GameStateManager.Instance.SetState(GameState.Pause);
         pauseMenu.SetActive(true);
         Time.timeScale = 0; // Placeholder
     }
     
     public void Resume()
     {
-        GameState currentGameState = GameStateManager.Instance.CurrentGameState;
-        GameState newGameState = currentGameState == GameState.Gameplay
-            ? GameState.Pause
-            : GameState.Gameplay;
-
-        GameStateManager.Instance.SetState(newGameState);
+        GameStateManager.Instance.SetState(GameState.Gameplay);
         pauseMenu.SetActive(false);
         Time.timeScale = 1; // Placeholder
     }

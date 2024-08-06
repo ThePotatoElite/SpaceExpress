@@ -5,49 +5,46 @@ using UnityEngine.EventSystems;
 public class PauseManager : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenuUI;
-    private bool _isPaused = false;
+    // private bool _isPaused = false;
 
     void Update()
     {
-        if (_isPaused && Input.GetMouseButtonDown(0))
+        if (GameStateManager.Instance.CurrentGameState == GameState.Pause && Input.GetMouseButtonDown(0))
         {
             if (!IsPointerOverUIElement())
             {
-                UnpauseGame();
+                TogglePauseMenu();
             }
         }
     }
 
-    public void TogglePauseMenu()
+    private void TogglePauseMenu()
     {
-        _isPaused = !_isPaused;
-        pauseMenuUI.SetActive(_isPaused);
-
-        if (_isPaused)
+        if (GameStateManager.Instance.CurrentGameState == GameState.Gameplay)
         {
             PauseGame();
         }
-        else
+        else if (GameStateManager.Instance.CurrentGameState == GameState.Pause)
         {
             UnpauseGame();
         }
     }
 
-    private void PauseGame()
+    void PauseGame()
     {
+        GameStateManager.Instance.SetState(GameState.Pause);
         Time.timeScale = 0f;
-        _isPaused = true;
         pauseMenuUI.SetActive(true);
     }
 
-    private void UnpauseGame()
+    void UnpauseGame()
     {
+        GameStateManager.Instance.SetState(GameState.Gameplay);
         Time.timeScale = 1f;
-        _isPaused = false;
         pauseMenuUI.SetActive(false);
     }
 
-    private bool IsPointerOverUIElement()
+    bool IsPointerOverUIElement()
     {
         PointerEventData eventData = new PointerEventData(EventSystem.current);
         eventData.position = Input.mousePosition;

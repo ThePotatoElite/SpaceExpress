@@ -10,10 +10,11 @@ public class TrainManager : MonoBehaviour
     private Vector3 _initialTrainPosition;
     private Quaternion _initialTrainRotation;
     public float initialSpeed;
+    private float _allowedTimeForTravel = 15f;
     private readonly int _health = 100;
     private bool _ready = false;
     private bool _hasStarted = false;
-    public bool _onRail = false;
+    private bool _onRail = false;
     public static bool LevelDone = false;
     
     public bool Ready { get => _ready; set => _ready = value; }
@@ -40,6 +41,13 @@ public class TrainManager : MonoBehaviour
             {
                 Debug.Log("On Rail"); // Not Working
                 MoveTrainOnRail();
+            }
+            
+            _allowedTimeForTravel -= Time.deltaTime;
+            if (_allowedTimeForTravel <= 0f)
+            {
+                ResetTrain();
+                Debug.Log("Time's up! Resetting train back to its initial position!");
             }
         }
     }
@@ -120,5 +128,6 @@ public class TrainManager : MonoBehaviour
         Ready = false;
         OnRail = false;
         trainRb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
+        _allowedTimeForTravel = 15f;
     }
 }
