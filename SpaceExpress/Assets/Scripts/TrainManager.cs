@@ -6,6 +6,7 @@ public class TrainManager : MonoBehaviour
     private float _speed;
     [SerializeField] public Vector3 applySpeed;
     [SerializeField] Rigidbody trainRb;
+    
     // private Vector3 _beamPosition;
     private Vector3 _initialTrainPosition;
     private Quaternion _initialTrainRotation;
@@ -15,13 +16,24 @@ public class TrainManager : MonoBehaviour
     private bool _ready = false;
     private bool _hasStarted = false;
     private bool _onRail = false;
+    private bool _isPaused = false;
     public static bool LevelDone = false;
     
     public bool Ready { get => _ready; set => _ready = value; }
     public bool OnRail { get => _onRail; set => _onRail = value; }
     
+    private void OnEnable()
+    {
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDisable()
+    {
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
     void Start()
     {
+        Debug.Log(_isPaused);
         _initialTrainPosition = transform.position;
         _initialTrainRotation = transform.rotation;
         initialSpeed = applySpeed.x;
@@ -30,19 +42,31 @@ public class TrainManager : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(_isPaused);
+        if (_isPaused)
+        {
+            PauseRide();
+            return;
+        }
+
         if (Ready)
         {
             if (!_hasStarted)
-            { StartRide(); _hasStarted = true; }
+            {
+                StartRide();
+                _hasStarted = true;
+            }
 
             if (!OnRail)
-            { MoveTrain(); }
+            {
+                MoveTrain();
+            }
             else if (OnRail)
             {
                 Debug.Log("On Rail"); // Not Working
                 MoveTrainOnRail();
             }
-            
+
             _allowedTimeForTravel -= Time.deltaTime;
             if (_allowedTimeForTravel <= 0f)
             {
@@ -56,6 +80,16 @@ public class TrainManager : MonoBehaviour
     {
         _hasStarted = true;
         trainRb.linearVelocity = applySpeed;
+        Physics.gravity = new Vector3(-5, 0, 0);
+    }
+
+    void PauseRide()
+    {
+        trainRb.linearVelocity = Vector3.zero;
+        _speed = initialSpeed;
+        applySpeed = new Vector3(_speed, 0f, 0f);
+        Physics.gravity = new Vector3(0, 0, 0);
+        _hasStarted = false;
     }
     
     public void SetOnRail(bool onRail/*, Vector3 beamPosition*/)
@@ -129,5 +163,16 @@ public class TrainManager : MonoBehaviour
         OnRail = false;
         trainRb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
         _allowedTimeForTravel = 15f;
+    }
+    
+    private void OnGameStateChanged(GameState newGameState)
+    {
+        if (newGameState == GameState.Pause)
+            _isPaused = true;
+        else
+        {
+            _isPaused = false;
+        }
+
     }
 }

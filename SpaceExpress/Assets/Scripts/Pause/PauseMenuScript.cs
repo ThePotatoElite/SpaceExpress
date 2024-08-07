@@ -11,14 +11,12 @@ public class PauseMenuScript : MonoBehaviour
     {
         GameStateManager.Instance.SetState(GameState.Pause);
         pauseMenu.SetActive(true);
-        Time.timeScale = 0; // Placeholder
     }
     
     public void Resume()
     {
         GameStateManager.Instance.SetState(GameState.Gameplay);
         pauseMenu.SetActive(false);
-        Time.timeScale = 1; // Placeholder
     }
     
     /*

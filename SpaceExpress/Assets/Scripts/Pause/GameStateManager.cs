@@ -1,4 +1,6 @@
-public class GameStateManager
+using UnityEngine;  
+
+public class GameStateManager //: MonoBehaviour
 {
     private static GameStateManager _instance;
     
