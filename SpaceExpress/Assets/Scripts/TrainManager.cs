@@ -11,7 +11,7 @@ public class TrainManager : MonoBehaviour
     private Vector3 _initialTrainPosition;
     private Quaternion _initialTrainRotation;
     public float initialSpeed;
-    private float _allowedTimeForTravel = 15f;
+    public float allowedTimeForTravel = 15f;
     private readonly int _health = 100;
     private bool _ready = false;
     private bool _hasStarted = false;
@@ -65,8 +65,8 @@ public class TrainManager : MonoBehaviour
                 MoveTrainOnRail();
             }
 
-            _allowedTimeForTravel -= Time.deltaTime;
-            if (_allowedTimeForTravel <= 0f)
+            allowedTimeForTravel -= Time.deltaTime;
+            if (allowedTimeForTravel <= 0f)
             {
                 ResetTrain();
                 Debug.Log("Time's up! Resetting train back to its initial position!");
@@ -160,7 +160,7 @@ public class TrainManager : MonoBehaviour
         Ready = false;
         OnRail = false;
         trainRb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
-        _allowedTimeForTravel = 15f;
+        allowedTimeForTravel = 15f;
     }
     
     private void OnGameStateChanged(GameState newGameState)

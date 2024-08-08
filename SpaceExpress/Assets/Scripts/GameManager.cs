@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TrainManager trainManager;
     [SerializeField] TextMeshProUGUI tutorial;
     [SerializeField] TextMeshProUGUI wellDone;
+    [SerializeField] TextMeshProUGUI timeIsUpMessage;
     // [SerializeField] GameObject beamPrefab;
     
     public Vector3 gravity;
@@ -26,6 +28,10 @@ public class GameManager : MonoBehaviour
         if (TrainManager.LevelDone)
         {
             Celebration();
+        }
+        else if (trainManager.Ready && trainManager.allowedTimeForTravel <= 0f)
+        {
+            StartCoroutine(ShowTimeIsUpMessage()); // Show the UI message
         }
         /*
         if (_isPlacingBeam && _currentBeam != null)
@@ -80,20 +86,27 @@ public class GameManager : MonoBehaviour
         _driveMode = false;
         wellDone.gameObject.SetActive(true);
     }
+
+    private IEnumerator ShowTimeIsUpMessage()
+    {
+        timeIsUpMessage.gameObject.SetActive(true);
+        yield return new WaitForSeconds(2f); // Show for 2 seconds
+        timeIsUpMessage.gameObject.SetActive(false);
+    }
     /*
     public void SpawnBeam()
     {
         _currentBeam = Instantiate(beamPrefab);
         _isPlacingBeam = true;
     }
-    
+
     void FollowMouse(GameObject beam)
     {
         Vector3 mouseScreenPosition = Input.mousePosition;
         mouseScreenPosition.z = Camera.main.WorldToScreenPoint(beam.transform.position).z;
         beam.transform.position = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
     }
-    
+
     void RotateBeam(GameObject beam)
     {
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
@@ -106,7 +119,7 @@ public class GameManager : MonoBehaviour
             beam.transform.Rotate(Vector3.right, -100f * Time.deltaTime);
         }
     }
-    
+
     void PlaceBeam()
     {
         _isPlacingBeam = false;

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Beam : MonoBehaviour
 {
-    [SerializeField] float rotationSpeed = 100f;
+    [SerializeField] float rotationSpeed = 120f;
     [SerializeField] Material highlightMaterial;
     [SerializeField] GameManager gameManager;
     private Vector3 _offset;
@@ -51,7 +51,6 @@ public class Beam : MonoBehaviour
             {
                 _isDragging = true;
                 _offset = transform.position - GetMouseWorldPosition();
-                HighlightBeam(true);
             }
         }
     }
@@ -70,6 +69,12 @@ public class Beam : MonoBehaviour
         if (!_isCollidingWithBeam)
         {
             transform.position = GetMouseWorldPosition() + _offset;
+            HighlightBeam(true);
+        }
+        else if (_isCollidingWithBeam)
+        {
+            transform.position = GetMouseWorldPosition() + _offset;
+            HighlightBeam(false);
         }
     }
 
