@@ -2,6 +2,11 @@ public class GameStateManager
 {
     private static GameStateManager _instance;
     
+    private GameStateManager()
+    {
+
+    }    
+    
     public static GameStateManager Instance 
     {
         get
@@ -18,16 +23,10 @@ public class GameStateManager
     public delegate void GameStateChangeHandler(GameState newGameState);
     public event GameStateChangeHandler OnGameStateChanged;
     
-    private GameStateManager()
-    {
-
-    }
-
     public void SetState(GameState newGameState)
     {
         if (newGameState == CurrentGameState)
             return;
-
         CurrentGameState = newGameState;
         OnGameStateChanged?.Invoke(newGameState);
     }

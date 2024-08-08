@@ -9,10 +9,10 @@ public class Beam : MonoBehaviour
     // private Vector3 _forceDirection;
     private bool _isDragging = false;
     private bool _isCollidingWithBeam = false;
+    // private bool _isPlacing = false;
     private Camera _mainCamera;
     private Material _originalMaterial;
     private Renderer _beamRenderer;
-    // private bool _isPlacing = false;
 
     void Start()
     {
@@ -114,7 +114,6 @@ public class Beam : MonoBehaviour
         _isPlacing = isPlacing;
     }
     */
-    
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Beam"))
@@ -122,15 +121,6 @@ public class Beam : MonoBehaviour
             _isCollidingWithBeam = true;
         }
     }
-    /*
-    void OnCollisionStay(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Beam"))
-        {
-            _isCollidingWithBeam = true;
-        }
-    }
-    */
     
     void OnCollisionExit(Collision collision)
     {

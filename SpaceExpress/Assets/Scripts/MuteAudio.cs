@@ -1,4 +1,5 @@
 using UnityEngine;
+
 public class MuteAudio : MonoBehaviour
 {
     public void MuteHandler(bool mute)

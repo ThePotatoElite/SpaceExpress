@@ -4,7 +4,7 @@ public class PauseMenuScript : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu;
     // [SerializeField] GameObject settingsMenu;
-    // public AudioManager audioManager;
+    // public AudioManager audioManage;
     
     public void Pause()
     {
@@ -17,7 +17,6 @@ public class PauseMenuScript : MonoBehaviour
         GameStateManager.Instance.SetState(GameState.Gameplay);
         pauseMenu.SetActive(false);
     }
-    
     /*
     public void Settings()
     {
@@ -34,7 +33,6 @@ public class PauseMenuScript : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
     */
-
     public void ExitGame()
     {
         Application.Quit();

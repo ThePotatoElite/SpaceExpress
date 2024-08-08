@@ -17,11 +17,11 @@ public class PullForce : MonoBehaviour
         {
             if (Vector3.Distance(transform.position, trainCollider.transform.position) <= pullRadius)
             {
-                Rigidbody trainRigidbody = trainCollider.GetComponent<Rigidbody>();
-                if (trainRigidbody != null)
+                Rigidbody trainRigidBody = trainCollider.GetComponent<Rigidbody>();
+                if (trainRigidBody != null)
                 {
                     Vector3 direction = transform.position - trainCollider.transform.position;
-                    trainRigidbody.AddForce(direction.normalized * (pullForce * Time.fixedDeltaTime));
+                    trainRigidBody.AddForce(direction.normalized * (pullForce * Time.fixedDeltaTime));
                 }
             }
         }

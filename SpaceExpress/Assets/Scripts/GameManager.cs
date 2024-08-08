@@ -1,8 +1,7 @@
-using System.Collections;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using System.Collections.Generic;
+using TMPro;
 // using Cinemachine;
 
 public class GameManager : MonoBehaviour
@@ -12,15 +11,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI wellDone;
     [SerializeField] TextMeshProUGUI timeIsUpMessage;
     // [SerializeField] GameObject beamPrefab;
-    
-    public Vector3 gravity;
-    private bool _driveMode = false;
-    // private bool _isPlacingBeam = false;
-    // private GameObject _currentBeam;
-    public bool DriveMode { get => _driveMode; set => _driveMode = value; }
-
     // [SerializeField] GameObject mainCamera;
     // [SerializeField] CinemachineVirtualCamera cinemachineCamera;
+    // private GameObject _currentBeam;
+    // private bool _isPlacingBeam = false;
+    private bool _driveMode = false;
+    public Vector3 gravity;
+    
+    public bool DriveMode { get => _driveMode; set => _driveMode = value; }
 
     void Update()
     {
@@ -28,10 +26,6 @@ public class GameManager : MonoBehaviour
         if (TrainManager.LevelDone)
         {
             Celebration();
-        }
-        else if (trainManager.Ready && trainManager.allowedTimeForTravel <= 0f)
-        {
-            StartCoroutine(ShowTimeIsUpMessage()); // Show the UI message
         }
         /*
         if (_isPlacingBeam && _currentBeam != null)
@@ -62,7 +56,6 @@ public class GameManager : MonoBehaviour
         _driveMode = false;
         wellDone.gameObject.SetActive(false);
         trainManager.ResetTrain();
-        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     
     public void Rewind()
@@ -73,13 +66,6 @@ public class GameManager : MonoBehaviour
         trainManager.ResetTrain();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-    
-    /*
-    public void EnterRailMode()
-    {
-        _railMode = !_railMode;
-    }
-    */
 
     void Celebration()
     {
@@ -87,10 +73,10 @@ public class GameManager : MonoBehaviour
         wellDone.gameObject.SetActive(true);
     }
 
-    private IEnumerator ShowTimeIsUpMessage()
+    public IEnumerator<WaitForSeconds> ShowTimeIsUpMessage()
     {
         timeIsUpMessage.gameObject.SetActive(true);
-        yield return new WaitForSeconds(2f); // Show for 2 seconds
+        yield return new WaitForSeconds(2); // Show for 2 seconds
         timeIsUpMessage.gameObject.SetActive(false);
     }
     /*
@@ -111,12 +97,12 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
-            beam.transform.Rotate(Vector3.right, 100f * Time.deltaTime);
+            beam.transform.Rotate(Vector3.right, 120f * Time.deltaTime);
         }
 
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
-            beam.transform.Rotate(Vector3.right, -100f * Time.deltaTime);
+            beam.transform.Rotate(Vector3.right, -120f * Time.deltaTime);
         }
     }
 
