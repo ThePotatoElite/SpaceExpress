@@ -9,6 +9,7 @@ TagManager:
   - Ball
   - Rail
   - Beam
+  - TrainWheel
   layers:
   - Default
   - TransparentFX

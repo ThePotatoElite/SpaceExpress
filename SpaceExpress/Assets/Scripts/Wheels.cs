@@ -1,15 +1,18 @@
 using UnityEngine;
 
-public class Wheels : MonoBehaviour
+public class TrainWheelScript : MonoBehaviour
 {
-    [SerializeField] GameObject cart;
-    private void OnTriggerStay(Collider other)
+    public float speed = 5f;
+    private Rigidbody rb;
+
+    void Start()
     {
-        if (other.gameObject.CompareTag("Rail"))
-        {
-            // Cart.transform.Rotate(other.transform.rotation.eulerAngles);
-            Debug.Log($"{cart.name} Should be rotating");
-        }
-        else { Debug.Log("What is happening?"); }
+        rb = GetComponent<Rigidbody>();
+    }
+
+    void FixedUpdate()
+    {
+        // Move the train along the x-axis
+        rb.linearVelocity = new Vector3(speed, rb.linearVelocity.y, rb.linearVelocity.z);
     }
 }

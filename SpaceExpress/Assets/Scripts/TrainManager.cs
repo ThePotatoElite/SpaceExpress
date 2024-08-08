@@ -33,7 +33,6 @@ public class TrainManager : MonoBehaviour
     }
     void Start()
     {
-        Debug.Log(_isPaused);
         _initialTrainPosition = transform.position;
         _initialTrainRotation = transform.rotation;
         initialSpeed = applySpeed.x;
@@ -42,7 +41,6 @@ public class TrainManager : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(_isPaused);
         if (_isPaused)
         {
             PauseRide();
