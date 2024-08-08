@@ -4,7 +4,6 @@ public class PauseMenuScript : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu;
     // [SerializeField] GameObject settingsMenu;
-    
     // public AudioManager audioManager;
     
     public void Pause()

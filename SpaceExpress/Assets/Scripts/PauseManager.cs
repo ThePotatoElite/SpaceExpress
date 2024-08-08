@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 public class PauseManager : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenuUI;
-    // private bool _isPaused = false;
 
     void Update()
     {
@@ -33,14 +32,12 @@ public class PauseManager : MonoBehaviour
     void PauseGame()
     {
         GameStateManager.Instance.SetState(GameState.Pause);
-        //Time.timeScale = 0f;
         pauseMenuUI.SetActive(true);
     }
 
     void UnpauseGame()
     {
         GameStateManager.Instance.SetState(GameState.Gameplay);
-        //Time.timeScale = 1f;
         pauseMenuUI.SetActive(false);
     }
 
