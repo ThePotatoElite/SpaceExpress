@@ -1,10 +1,14 @@
 using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
 
 public class TrainManager : MonoBehaviour
 {
     [SerializeField] public Vector3 applySpeed;
     [SerializeField] Rigidbody trainRb;
+    [SerializeField] TextMeshProUGUI timeIsUpMessage;
+    [SerializeField] GameObject restartButton;
+    [SerializeField] GameObject readyButton;
     // private Vector3 _beamPosition;
     private Vector3 _initialTrainPosition;
     private Quaternion _initialTrainRotation;
@@ -17,6 +21,8 @@ public class TrainManager : MonoBehaviour
     public float initialSpeed;
     public float allowedTimeForTravel = 15f;
     public static bool LevelDone = false;
+    private float _timeRemaining = 2f; // To show the Try Again message
+    private bool _showMessage = false;
     
     private bool OnRail { get => _onRail; set => _onRail = value; }
     public bool Ready { get => _ready; set => _ready = value; }
@@ -70,7 +76,23 @@ public class TrainManager : MonoBehaviour
             if (allowedTimeForTravel <= 0f)
             {
                 ResetTrain();
+                restartButton.SetActive(false);
+                readyButton.SetActive(true);
+                timeIsUpMessage.gameObject.SetActive(true);
+                _showMessage = true;
+                _timeRemaining = 2f; // Show for 2 seconds
+                timeIsUpMessage.gameObject.SetActive(false);
                 Debug.Log("Time's up! Resetting train back to its initial position!");
+            }
+            
+            if (_showMessage)
+            {
+                _timeRemaining -= Time.deltaTime;
+                if (_timeRemaining <= 0f)
+                {
+                    timeIsUpMessage.gameObject.SetActive(false);
+                    _showMessage = false;
+                }
             }
         }
     }

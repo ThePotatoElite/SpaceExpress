@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] TrainManager trainManager;
     [SerializeField] TextMeshProUGUI tutorial;
     [SerializeField] TextMeshProUGUI wellDone;
-    [SerializeField] TextMeshProUGUI timeIsUpMessage;
     // [SerializeField] GameObject beamPrefab;
     // [SerializeField] GameObject mainCamera;
     // [SerializeField] CinemachineVirtualCamera cinemachineCamera;
@@ -23,6 +22,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         Physics.gravity = gravity;
+        
         if (TrainManager.LevelDone)
         {
             Celebration();
@@ -72,13 +72,7 @@ public class GameManager : MonoBehaviour
         _driveMode = false;
         wellDone.gameObject.SetActive(true);
     }
-
-    public IEnumerator<WaitForSeconds> ShowTimeIsUpMessage()
-    {
-        timeIsUpMessage.gameObject.SetActive(true);
-        yield return new WaitForSeconds(2); // Show for 2 seconds
-        timeIsUpMessage.gameObject.SetActive(false);
-    }
+    
     /*
     public void SpawnBeam()
     {

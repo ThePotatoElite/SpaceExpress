@@ -2,15 +2,13 @@ using UnityEngine;
 
 public class MuteAudio : MonoBehaviour
 {
+    [SerializeField] AudioSource trainAudioSource;
+
     public void MuteHandler(bool mute)
     {
-        if (mute)
+        if (trainAudioSource != null)
         {
-            AudioListener.volume = 0;
-        }
-        else
-        {
-            AudioListener.volume = 1;
+            trainAudioSource.mute = mute;
         }
     }
 }

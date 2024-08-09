@@ -743,7 +743,6 @@ MonoBehaviour:
   trainManager: {fileID: 1449572945}
   tutorial: {fileID: 246181912}
   wellDone: {fileID: 326969175}
-  timeIsUpMessage: {fileID: 1621959534}
   gravity: {x: 0, y: -5, z: 0}
 --- !u!1 &326969173
 GameObject:
@@ -4553,6 +4552,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8287485763968563090, guid: eda0954654005ca4ea7f985dbe6ef6f8, type: 3}
+      propertyPath: readyButton
+      value: 
+      objectReference: {fileID: 937870751}
+    - target: {fileID: 8287485763968563090, guid: eda0954654005ca4ea7f985dbe6ef6f8, type: 3}
       propertyPath: applySpeed.x
       value: 135
       objectReference: {fileID: 0}
@@ -4560,6 +4563,14 @@ PrefabInstance:
       propertyPath: initialSpeed
       value: 135
       objectReference: {fileID: 0}
+    - target: {fileID: 8287485763968563090, guid: eda0954654005ca4ea7f985dbe6ef6f8, type: 3}
+      propertyPath: restartButton
+      value: 
+      objectReference: {fileID: 692550574}
+    - target: {fileID: 8287485763968563090, guid: eda0954654005ca4ea7f985dbe6ef6f8, type: 3}
+      propertyPath: timeIsUpMessage
+      value: 
+      objectReference: {fileID: 1621959534}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
