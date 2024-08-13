@@ -62,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e8c36d7e95664534dbf4a76a26cad32d, type: 3}
       propertyPath: m_Name
-      value: New Trying Beam 1
+      value: SpawnBeam
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e8c36d7e95664534dbf4a76a26cad32d, type: 3}
       propertyPath: m_IsActive
@@ -151,6 +151,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be78b810ffb033a419f7bac426ed192e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 100
+  rotationSpeed: 120
   highlightMaterial: {fileID: 2100000, guid: 4cdef1d9b4d5cdf47a523d865d0d2fdd, type: 2}
   gameManager: {fileID: 0}
