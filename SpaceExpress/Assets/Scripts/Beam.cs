@@ -19,6 +19,7 @@ public class Beam : MonoBehaviour
     void Awake()
     {
         _audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
     
     void Start()
