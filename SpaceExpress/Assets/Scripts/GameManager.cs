@@ -9,11 +9,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] TrainManager trainManager;
     [SerializeField] TextMeshProUGUI tutorial;
     [SerializeField] TextMeshProUGUI wellDone;
-    // [SerializeField] GameObject beamPrefab;
+    [SerializeField] GameObject beamPrefab;
     // [SerializeField] GameObject mainCamera;
     // [SerializeField] CinemachineVirtualCamera cinemachineCamera;
-    // private GameObject _currentBeam;
-    // private bool _isPlacingBeam = false;
+    private GameObject _currentBeam;
+    private bool _isPlacingBeam = false;
     private AudioManager _audioManager;
     private bool _driveMode = false;
     public Vector3 gravity;
@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
         {
             Celebration();
         }
-        /*
+        
         if (_isPlacingBeam && _currentBeam != null)
         {
             FollowMouse(_currentBeam);
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
         {
             PlaceBeam();
         }
-        */
+        
     }
 
     public void StartDriveMode()
@@ -81,11 +81,16 @@ public class GameManager : MonoBehaviour
         wellDone.gameObject.SetActive(true);
     }
     
-    /*
     public void SpawnBeam()
     {
         _currentBeam = Instantiate(beamPrefab);
         _isPlacingBeam = true;
+        _audioManager.PlaySFX(_audioManager.pickup);
+        Beam beamScript = _currentBeam.GetComponent<Beam>();
+        if (beamScript != null)
+        {
+            beamScript.SetPlacing(true);
+        }
     }
 
     void FollowMouse(GameObject beam)
@@ -97,12 +102,12 @@ public class GameManager : MonoBehaviour
 
     void RotateBeam(GameObject beam)
     {
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) // Rotate Beam counterclockwise
         {
             beam.transform.Rotate(Vector3.right, 120f * Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) // Rotate Beam clockwise
         {
             beam.transform.Rotate(Vector3.right, -120f * Time.deltaTime);
         }
@@ -111,6 +116,7 @@ public class GameManager : MonoBehaviour
     void PlaceBeam()
     {
         _isPlacingBeam = false;
+        _audioManager.PlaySFX(_audioManager.place);
         _currentBeam = null;
     }
     /*

@@ -10,7 +10,7 @@ public class Beam : MonoBehaviour
     private bool _isDragging = false;
     private bool _isCollidingWithBeam = false;
     private bool _isCollidingWithPlayer = false;
-    // private bool _isPlacing = false;
+    private bool _isPlacing = false; // Should I remove this entirely and switch all to _isDragging?
     private Camera _mainCamera;
     private Material _originalMaterial;
     private Renderer _beamRenderer;
@@ -38,23 +38,16 @@ public class Beam : MonoBehaviour
             DragBeam();
             RotateBeam();
         }
-        /*
-        if (_isPlacing)
-        {
-            HighlightBeam(true);
-        }
-        else
-        {
-            HighlightBeam(false);
-        }
-        */
+
+        HighlightBeam(_isPlacing);
+        // HighlightBeam(_isDragging);
     }
     
     void OnMouseDown() // Pickup Beam
     {
         if (!gameManager.DriveMode)
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0)) // if (!_isDragging)? - Something different to try?
             {
                 _isDragging = true;
                 _audioManager.PlaySFX(_audioManager.pickup);
@@ -63,11 +56,12 @@ public class Beam : MonoBehaviour
         }
     }
 
-    void OnMouseUp() // Leave Beam
+    void OnMouseUp() // Place Beam
     {
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0)) // if (_isDragging)? - Something different to try?
         {
             _isDragging = false;
+            _isPlacing = false;
             _audioManager.PlaySFX(_audioManager.place);
             HighlightBeam(false);
         }
@@ -117,12 +111,12 @@ public class Beam : MonoBehaviour
             _beamRenderer.material = highlight ? highlightMaterial : _originalMaterial;
         }
     }
-    /*
+    
     public void SetPlacing(bool isPlacing)
     {
         _isPlacing = isPlacing;
     }
-    */
+    
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Beam"))
