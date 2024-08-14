@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviour
     private AudioManager _audioManager;
     private bool _driveMode = false;
     public Vector3 gravity;
-    public int lastLevelDone = 5;
     
     public bool DriveMode { get => _driveMode; set => _driveMode = value; }
 
@@ -80,12 +79,6 @@ public class GameManager : MonoBehaviour
     {
         _driveMode = false;
         wellDone.gameObject.SetActive(true);
-        lastLevelDone--;
-        if (lastLevelDone == 0)
-        {
-            _audioManager.PlaySFX(_audioManager.completeAll);
-            lastLevelDone = 5;
-        }
     }
     
     /*

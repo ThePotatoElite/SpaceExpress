@@ -2598,6 +2598,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5102a15b4ce39aa4e9ddc355dbd2b1ac, type: 3}
       insertIndex: -1
       addedObject: {fileID: 918158483}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5102a15b4ce39aa4e9ddc355dbd2b1ac, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 918158484}
   m_SourcePrefab: {fileID: 100100000, guid: 5102a15b4ce39aa4e9ddc355dbd2b1ac, type: 3}
 --- !u!1 &918158479 stripped
 GameObject:
@@ -2621,7 +2624,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 4
   m_Height: 12
@@ -2655,6 +2658,27 @@ MonoBehaviour:
   pullRadius: 250
   pullForce: 100
   trainCollider: {fileID: 2006503964}
+--- !u!65 &918158484
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 918158479}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 35, y: 26, z: 10}
+  m_Center: {x: 4.5, y: 13, z: 0}
 --- !u!1 &937870751
 GameObject:
   m_ObjectHideFlags: 0
@@ -5555,6 +5579,9 @@ MonoBehaviour:
   levelDone: {fileID: 8300000, guid: 71d4d961349d3b64cac0cfd0114e041a, type: 3}
   start: {fileID: 8300000, guid: 677c78e83a943dc499f67e4655cf936b, type: 3}
   restart: {fileID: 8300000, guid: b0e531457bff2b54aabd6137b9f71f71, type: 3}
+  pickup: {fileID: 8300000, guid: 6dad097e52118c04e86bfc4d5214ab85, type: 3}
+  place: {fileID: 8300000, guid: 0968cc764bb59454aa8ffaf0161d4317, type: 3}
+  rotate: {fileID: 8300000, guid: a69637bef47ba564db90e0493efe0aeb, type: 3}
   completeAll: {fileID: 8300000, guid: f1c01d3fba469e94b833b95e4f7b0a84, type: 3}
   effectNumberOne: {fileID: 0}
   effectNumberTwo: {fileID: 0}

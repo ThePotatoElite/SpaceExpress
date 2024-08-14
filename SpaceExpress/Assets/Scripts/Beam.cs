@@ -14,7 +14,13 @@ public class Beam : MonoBehaviour
     private Camera _mainCamera;
     private Material _originalMaterial;
     private Renderer _beamRenderer;
+    private AudioManager _audioManager;
 
+    void Awake()
+    {
+        _audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+    
     void Start()
     {
         _mainCamera = Camera.main;
@@ -51,6 +57,7 @@ public class Beam : MonoBehaviour
             if (Input.GetMouseButton(0))
             {
                 _isDragging = true;
+                _audioManager.PlaySFX(_audioManager.pickup);
                 _offset = transform.position - GetMouseWorldPosition();
             }
         }
@@ -61,6 +68,7 @@ public class Beam : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             _isDragging = false;
+            _audioManager.PlaySFX(_audioManager.place);
             HighlightBeam(false);
         }
     }

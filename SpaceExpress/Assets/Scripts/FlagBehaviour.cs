@@ -7,7 +7,7 @@ public class FlagBehaviour : MonoBehaviour
     private float _speed = 50f;
     private Collider _collider;
     private AudioManager _audioManager;
-    private Renderer _flagRenderer;
+    // private Renderer _flagRenderer; // NOT WORKING
     
     void Awake()
     {
@@ -17,7 +17,7 @@ public class FlagBehaviour : MonoBehaviour
     void Start()
     {
         _collider = GetComponent<Collider>();
-        _flagRenderer = GetComponent<Renderer>();
+        // _flagRenderer = GetComponent<Renderer>(); // NOT WORKING
     }
 
     void Update()
@@ -39,7 +39,7 @@ public class FlagBehaviour : MonoBehaviour
     void LevelPassed() // Should change to what actually happens when you hit the flag
     {
         _audioManager.PlaySFX(_audioManager.levelDone);
-        _flagRenderer.material = levelDoneMaterial; // NOT WORKING
+        // _flagRenderer.material = levelDoneMaterial; // NOT WORKING
         _moveDown = true;
         Destroy(gameObject, 2f); // Match the time before loading the next level
         // Insert Win Logic Later
