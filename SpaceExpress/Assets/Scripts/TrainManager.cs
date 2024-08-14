@@ -10,6 +10,7 @@ public class TrainManager : MonoBehaviour
     [SerializeField] GameObject restartButton;
     [SerializeField] GameObject readyButton;
     // private Vector3 _beamPosition;
+    private AudioManager _audioManager;
     private Vector3 _initialTrainPosition;
     private Quaternion _initialTrainRotation;
     private readonly int _health = 100;
@@ -27,14 +28,19 @@ public class TrainManager : MonoBehaviour
     private bool OnRail { get => _onRail; set => _onRail = value; }
     public bool Ready { get => _ready; set => _ready = value; }
     
-    private void OnEnable()
+    void OnEnable()
     {
         GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
     }
 
-    private void OnDisable()
+    void OnDisable()
     {
         GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+    
+    void Awake()
+    {
+        _audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
     
     void Start()
@@ -75,6 +81,7 @@ public class TrainManager : MonoBehaviour
             
             if (allowedTimeForTravel <= 0f)
             {
+                _audioManager.PlaySFX(_audioManager.levelTimeOut);
                 ResetTrain();
                 restartButton.SetActive(false);
                 readyButton.SetActive(true);
@@ -142,8 +149,8 @@ public class TrainManager : MonoBehaviour
     {
         if (other.CompareTag("Flag"))
         {
-            _speed = 0f; // Stop train when hitting flag
-            applySpeed = new Vector3(_speed, 0f, 0f); // Stop now!
+            // _speed = 0f; // Stop train when hitting flag
+            // applySpeed = new Vector3(_speed, 0f, 0f); // Stop now!
             trainRb.constraints = RigidbodyConstraints.None; // Allow gravity
             trainRb.useGravity = true;
             LevelDone = true;
@@ -181,7 +188,7 @@ public class TrainManager : MonoBehaviour
         allowedTimeForTravel = 15f;
     }
     
-    private void OnGameStateChanged(GameState newGameState)
+    void OnGameStateChanged(GameState newGameState)
     {
         if (newGameState == GameState.Pause)
             _isPaused = true;

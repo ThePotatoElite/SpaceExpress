@@ -274,6 +274,7 @@ GameObject:
   - component: {fileID: 9173649539881741693}
   - component: {fileID: 8988997268870758758}
   - component: {fileID: 6735173915086100589}
+  - component: {fileID: 2359903483132849339}
   m_Layer: 0
   m_Name: Wheels
   m_TagString: Wheels
@@ -372,6 +373,19 @@ CapsuleCollider:
   m_Height: 60
   m_Direction: 2
   m_Center: {x: 0, y: -4, z: 3}
+--- !u!114 &2359903483132849339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4742448671932954221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6665669f044d3694d90cd67285f80b35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cart: {fileID: 0}
 --- !u!1 &5423403324693592137
 GameObject:
   m_ObjectHideFlags: 0

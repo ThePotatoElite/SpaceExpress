@@ -14,11 +14,18 @@ public class GameManager : MonoBehaviour
     // [SerializeField] CinemachineVirtualCamera cinemachineCamera;
     // private GameObject _currentBeam;
     // private bool _isPlacingBeam = false;
+    private AudioManager _audioManager;
     private bool _driveMode = false;
     public Vector3 gravity;
+    public int lastLevelDone = 5;
     
     public bool DriveMode { get => _driveMode; set => _driveMode = value; }
 
+    void Awake()
+    {
+        _audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+    
     void Update()
     {
         Physics.gravity = gravity;
@@ -43,6 +50,7 @@ public class GameManager : MonoBehaviour
 
     public void StartDriveMode()
     {
+        _audioManager.PlaySFX(_audioManager.start);
         tutorial.gameObject.SetActive(false);
         trainManager.Ready = true;
         trainManager.applySpeed = new Vector3(trainManager.initialSpeed, 0f, 0f);
@@ -52,6 +60,7 @@ public class GameManager : MonoBehaviour
 
     public void RestartScene()
     {
+        _audioManager.PlaySFX(_audioManager.restart);
         TrainManager.LevelDone = false;
         _driveMode = false;
         wellDone.gameObject.SetActive(false);
@@ -71,6 +80,12 @@ public class GameManager : MonoBehaviour
     {
         _driveMode = false;
         wellDone.gameObject.SetActive(true);
+        lastLevelDone--;
+        if (lastLevelDone == 0)
+        {
+            _audioManager.PlaySFX(_audioManager.completeAll);
+            lastLevelDone = 5;
+        }
     }
     
     /*

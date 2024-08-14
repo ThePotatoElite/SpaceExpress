@@ -9,6 +9,7 @@ public class Beam : MonoBehaviour
     // private Vector3 _forceDirection;
     private bool _isDragging = false;
     private bool _isCollidingWithBeam = false;
+    private bool _isCollidingWithPlayer = false;
     // private bool _isPlacing = false;
     private Camera _mainCamera;
     private Material _originalMaterial;
@@ -66,12 +67,12 @@ public class Beam : MonoBehaviour
 
     void DragBeam()
     {
-        if (!_isCollidingWithBeam)
+        if (!_isCollidingWithBeam && !_isCollidingWithPlayer)
         {
             transform.position = GetMouseWorldPosition() + _offset;
             HighlightBeam(true);
         }
-        else if (_isCollidingWithBeam)
+        else if (_isCollidingWithBeam || _isCollidingWithPlayer)
         {
             transform.position = GetMouseWorldPosition() + _offset;
             HighlightBeam(false);
@@ -120,6 +121,10 @@ public class Beam : MonoBehaviour
         {
             _isCollidingWithBeam = true;
         }
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            _isCollidingWithPlayer = true;
+        }
     }
     
     void OnCollisionExit(Collision collision)
@@ -127,6 +132,10 @@ public class Beam : MonoBehaviour
         if (collision.gameObject.CompareTag("Beam"))
         {
             _isCollidingWithBeam = false;
+        }
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            _isCollidingWithPlayer = false;
         }
     }
 }
