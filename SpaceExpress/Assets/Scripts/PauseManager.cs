@@ -1,23 +1,18 @@
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class PauseManager : MonoBehaviour
 {
-    [SerializeField] private GameObject pauseMenuUI;
+    [SerializeField] GameObject pauseMenuUI;
 
     void Update()
     {
         if (GameStateManager.Instance.CurrentGameState == GameState.Pause && Input.GetMouseButtonDown(0))
         {
-            if (!IsPointerOverUIElement())
-            {
-                TogglePauseMenu();
-            }
+            TogglePauseMenu();
         }
     }
 
-    private void TogglePauseMenu()
+    void TogglePauseMenu()
     {
         if (GameStateManager.Instance.CurrentGameState == GameState.Gameplay)
         {
@@ -39,14 +34,5 @@ public class PauseManager : MonoBehaviour
     {
         GameStateManager.Instance.SetState(GameState.Gameplay);
         pauseMenuUI.SetActive(false);
-    }
-
-    bool IsPointerOverUIElement()
-    {
-        PointerEventData eventData = new PointerEventData(EventSystem.current);
-        eventData.position = Input.mousePosition;
-        List<RaycastResult> results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(eventData, results);
-        return results.Count > 0;
     }
 }

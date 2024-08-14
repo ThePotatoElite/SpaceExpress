@@ -9,11 +9,18 @@ public class Beam : MonoBehaviour
     // private Vector3 _forceDirection;
     private bool _isDragging = false;
     private bool _isCollidingWithBeam = false;
+    private bool _isCollidingWithPlayer = false;
+    private bool _isPlacing = false; // Should I remove this entirely and switch all to _isDragging?
     private Camera _mainCamera;
     private Material _originalMaterial;
     private Renderer _beamRenderer;
-    // private bool _isPlacing = false;
+    private AudioManager _audioManager;
 
+    void Awake()
+    {
+        _audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+    
     void Start()
     {
         _mainCamera = Camera.main;
@@ -31,47 +38,43 @@ public class Beam : MonoBehaviour
             DragBeam();
             RotateBeam();
         }
-        /*
-        if (_isPlacing)
-        {
-            HighlightBeam(true);
-        }
-        else
-        {
-            HighlightBeam(false);
-        }
-        */
+
+        HighlightBeam(_isPlacing);
+        // HighlightBeam(_isDragging);
     }
     
     void OnMouseDown() // Pickup Beam
     {
         if (!gameManager.DriveMode)
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0)) // if (!_isDragging)? - Something different to try?
             {
                 _isDragging = true;
+                _audioManager.PlaySFX(_audioManager.pickup);
                 _offset = transform.position - GetMouseWorldPosition();
             }
         }
     }
 
-    void OnMouseUp() // Leave Beam
+    void OnMouseUp() // Place Beam
     {
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0)) // if (_isDragging)? - Something different to try?
         {
             _isDragging = false;
+            _isPlacing = false;
+            _audioManager.PlaySFX(_audioManager.place);
             HighlightBeam(false);
         }
     }
 
     void DragBeam()
     {
-        if (!_isCollidingWithBeam)
+        if (!_isCollidingWithBeam && !_isCollidingWithPlayer)
         {
             transform.position = GetMouseWorldPosition() + _offset;
             HighlightBeam(true);
         }
-        else if (_isCollidingWithBeam)
+        else if (_isCollidingWithBeam || _isCollidingWithPlayer)
         {
             transform.position = GetMouseWorldPosition() + _offset;
             HighlightBeam(false);
@@ -108,12 +111,11 @@ public class Beam : MonoBehaviour
             _beamRenderer.material = highlight ? highlightMaterial : _originalMaterial;
         }
     }
-    /*
+    
     public void SetPlacing(bool isPlacing)
     {
         _isPlacing = isPlacing;
     }
-    */
     
     void OnCollisionEnter(Collision collision)
     {
@@ -121,22 +123,21 @@ public class Beam : MonoBehaviour
         {
             _isCollidingWithBeam = true;
         }
-    }
-    /*
-    void OnCollisionStay(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Beam"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            _isCollidingWithBeam = true;
+            _isCollidingWithPlayer = true;
         }
     }
-    */
     
     void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.CompareTag("Beam"))
         {
             _isCollidingWithBeam = false;
+        }
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            _isCollidingWithPlayer = false;
         }
     }
 }

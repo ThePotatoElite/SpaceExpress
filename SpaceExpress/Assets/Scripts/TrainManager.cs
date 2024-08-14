@@ -1,36 +1,48 @@
 using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
 
 public class TrainManager : MonoBehaviour
 {
-    private float _speed;
     [SerializeField] public Vector3 applySpeed;
     [SerializeField] Rigidbody trainRb;
-    
+    [SerializeField] TextMeshProUGUI timeIsUpMessage;
+    [SerializeField] GameObject restartButton;
+    [SerializeField] GameObject readyButton;
     // private Vector3 _beamPosition;
+    private AudioManager _audioManager;
     private Vector3 _initialTrainPosition;
     private Quaternion _initialTrainRotation;
-    public float initialSpeed;
-    public float allowedTimeForTravel = 15f;
     private readonly int _health = 100;
     private bool _ready = false;
     private bool _hasStarted = false;
     private bool _onRail = false;
     private bool _isPaused = false;
+    private float _speed;
+    public float initialSpeed;
+    public float allowedTimeForTravel = 15f;
     public static bool LevelDone = false;
+    private float _timeRemaining = 2f; // To show the Try Again message
+    private bool _showMessage = false;
     
+    private bool OnRail { get => _onRail; set => _onRail = value; }
     public bool Ready { get => _ready; set => _ready = value; }
-    public bool OnRail { get => _onRail; set => _onRail = value; }
     
-    private void OnEnable()
+    void OnEnable()
     {
         GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
     }
 
-    private void OnDisable()
+    void OnDisable()
     {
         GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
     }
+    
+    void Awake()
+    {
+        _audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+    
     void Start()
     {
         _initialTrainPosition = transform.position;
@@ -61,15 +73,33 @@ public class TrainManager : MonoBehaviour
             }
             else if (OnRail)
             {
-                Debug.Log("On Rail"); // Not Working
+                Debug.Log("On Rail"); // NOT WORKING
                 MoveTrainOnRail();
             }
 
             allowedTimeForTravel -= Time.deltaTime;
+            
             if (allowedTimeForTravel <= 0f)
             {
+                _audioManager.PlaySFX(_audioManager.levelTimeOut);
                 ResetTrain();
+                restartButton.SetActive(false);
+                readyButton.SetActive(true);
+                timeIsUpMessage.gameObject.SetActive(true);
+                _showMessage = true;
+                _timeRemaining = 2f; // Show for 2 seconds
+                timeIsUpMessage.gameObject.SetActive(false);
                 Debug.Log("Time's up! Resetting train back to its initial position!");
+            }
+            
+            if (_showMessage)
+            {
+                _timeRemaining -= Time.deltaTime;
+                if (_timeRemaining <= 0f)
+                {
+                    timeIsUpMessage.gameObject.SetActive(false);
+                    _showMessage = false;
+                }
             }
         }
     }
@@ -90,10 +120,9 @@ public class TrainManager : MonoBehaviour
         _hasStarted = false;
     }
     
-    public void SetOnRail(bool onRail/*, Vector3 beamPosition*/)
+    public void SetOnRail(bool onRail)
     {
         _onRail = onRail;
-        // _beamPosition = beamPosition;
         if (onRail)
         {
             trainRb.AddForce(Vector3.down * 10f, ForceMode.Acceleration); // Apply Beam Force
@@ -107,24 +136,20 @@ public class TrainManager : MonoBehaviour
     void MoveTrainOnRail()
     {
         /*
-        trainRb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionY;
-        trainRb.linearVelocity = Vector3.forward * _speed;
+        trainRb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionY;
         */
     }
     
     void MoveTrain()
     {
-        //trainRb.constraints = RigidbodyConstraints.None;
         trainRb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
-        // transform.Translate(Vector3.forward * (speed * Time.deltaTime));
-        // trainRb.linearVelocity = applySpeed + Vector3.down * 1f; // Apply space-like gravity
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Flag"))
         {
-            _speed = 0f; // Stop train when hitting flag
+            // _speed = 0f; // Stop train when hitting flag
             // applySpeed = new Vector3(_speed, 0f, 0f); // Stop now!
             trainRb.constraints = RigidbodyConstraints.None; // Allow gravity
             trainRb.useGravity = true;
@@ -154,16 +179,16 @@ public class TrainManager : MonoBehaviour
         transform.position = _initialTrainPosition;
         transform.rotation = _initialTrainRotation;
         _hasStarted = false;
+        trainRb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
         trainRb.linearVelocity = Vector3.zero;
         _speed = initialSpeed;
         applySpeed = new Vector3(_speed, 0f, 0f);
         Ready = false;
         OnRail = false;
-        trainRb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
         allowedTimeForTravel = 15f;
     }
     
-    private void OnGameStateChanged(GameState newGameState)
+    void OnGameStateChanged(GameState newGameState)
     {
         if (newGameState == GameState.Pause)
             _isPaused = true;
@@ -171,6 +196,5 @@ public class TrainManager : MonoBehaviour
         {
             _isPaused = false;
         }
-
     }
 }

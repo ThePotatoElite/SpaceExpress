@@ -1,8 +1,7 @@
-using System.Collections;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using System.Collections.Generic;
+using TMPro;
 // using Cinemachine;
 
 public class GameManager : MonoBehaviour
@@ -10,30 +9,31 @@ public class GameManager : MonoBehaviour
     [SerializeField] TrainManager trainManager;
     [SerializeField] TextMeshProUGUI tutorial;
     [SerializeField] TextMeshProUGUI wellDone;
-    [SerializeField] TextMeshProUGUI timeIsUpMessage;
-    // [SerializeField] GameObject beamPrefab;
-    
-    public Vector3 gravity;
-    private bool _driveMode = false;
-    // private bool _isPlacingBeam = false;
-    // private GameObject _currentBeam;
-    public bool DriveMode { get => _driveMode; set => _driveMode = value; }
-
+    [SerializeField] GameObject beamPrefab;
     // [SerializeField] GameObject mainCamera;
     // [SerializeField] CinemachineVirtualCamera cinemachineCamera;
+    private GameObject _currentBeam;
+    private bool _isPlacingBeam = false;
+    private AudioManager _audioManager;
+    private bool _driveMode = false;
+    public Vector3 gravity;
+    
+    public bool DriveMode { get => _driveMode; set => _driveMode = value; }
 
+    void Awake()
+    {
+        _audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+    
     void Update()
     {
         Physics.gravity = gravity;
+        
         if (TrainManager.LevelDone)
         {
             Celebration();
         }
-        else if (trainManager.Ready && trainManager.allowedTimeForTravel <= 0f)
-        {
-            StartCoroutine(ShowTimeIsUpMessage()); // Show the UI message
-        }
-        /*
+        
         if (_isPlacingBeam && _currentBeam != null)
         {
             FollowMouse(_currentBeam);
@@ -44,11 +44,12 @@ public class GameManager : MonoBehaviour
         {
             PlaceBeam();
         }
-        */
+        
     }
 
     public void StartDriveMode()
     {
+        _audioManager.PlaySFX(_audioManager.start);
         tutorial.gameObject.SetActive(false);
         trainManager.Ready = true;
         trainManager.applySpeed = new Vector3(trainManager.initialSpeed, 0f, 0f);
@@ -58,11 +59,11 @@ public class GameManager : MonoBehaviour
 
     public void RestartScene()
     {
+        _audioManager.PlaySFX(_audioManager.restart);
         TrainManager.LevelDone = false;
         _driveMode = false;
         wellDone.gameObject.SetActive(false);
         trainManager.ResetTrain();
-        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     
     public void Rewind()
@@ -73,31 +74,23 @@ public class GameManager : MonoBehaviour
         trainManager.ResetTrain();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-    
-    /*
-    public void EnterRailMode()
-    {
-        _railMode = !_railMode;
-    }
-    */
 
     void Celebration()
     {
         _driveMode = false;
         wellDone.gameObject.SetActive(true);
     }
-
-    private IEnumerator ShowTimeIsUpMessage()
-    {
-        timeIsUpMessage.gameObject.SetActive(true);
-        yield return new WaitForSeconds(2f); // Show for 2 seconds
-        timeIsUpMessage.gameObject.SetActive(false);
-    }
-    /*
+    
     public void SpawnBeam()
     {
         _currentBeam = Instantiate(beamPrefab);
         _isPlacingBeam = true;
+        _audioManager.PlaySFX(_audioManager.pickup);
+        Beam beamScript = _currentBeam.GetComponent<Beam>();
+        if (beamScript != null)
+        {
+            beamScript.SetPlacing(true);
+        }
     }
 
     void FollowMouse(GameObject beam)
@@ -109,20 +102,21 @@ public class GameManager : MonoBehaviour
 
     void RotateBeam(GameObject beam)
     {
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) // Rotate Beam counterclockwise
         {
-            beam.transform.Rotate(Vector3.right, 100f * Time.deltaTime);
+            beam.transform.Rotate(Vector3.right, 120f * Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) // Rotate Beam clockwise
         {
-            beam.transform.Rotate(Vector3.right, -100f * Time.deltaTime);
+            beam.transform.Rotate(Vector3.right, -120f * Time.deltaTime);
         }
     }
 
     void PlaceBeam()
     {
         _isPlacingBeam = false;
+        _audioManager.PlaySFX(_audioManager.place);
         _currentBeam = null;
     }
     /*

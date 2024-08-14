@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Ron's Scene.unity
     guid: c698e58d91947c8478d3ab5a784028a3
   - enabled: 1
+    path: Assets/Scenes/Level 0.unity
+    guid: 00ae56630510f114fbc02d3cf2944dc3
+  - enabled: 1
     path: Assets/Scenes/Level 1.unity
     guid: 774c974daa229fa46b28fc32c723e63e
   - enabled: 1
@@ -20,6 +23,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level 3.unity
     guid: 6bd221b13346e1147aabe9ba8ca8a505
+  - enabled: 1
+    path: Assets/Scenes/Level 4.unity
+    guid: 95770af1e693b8443abbc652a04d1d8c
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
