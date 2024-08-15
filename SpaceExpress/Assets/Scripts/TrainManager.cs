@@ -2,9 +2,11 @@ using UnityEngine;
 using System.Collections.Generic;
 using TMPro;
 using System.Collections;
+using UnityEngine.UI;
 
 public class TrainManager : MonoBehaviour
 {
+    [SerializeField] Slider fuelBar;
     [SerializeField] public Vector3 applySpeed;
     [SerializeField] Rigidbody trainRb;
     [SerializeField] TextMeshProUGUI timeIsUpMessage;
@@ -77,7 +79,7 @@ public class TrainManager : MonoBehaviour
             }
 
             allowedTimeForTravel -= Time.deltaTime;
-
+            AdjustSlider();
             if (allowedTimeForTravel <= 0f)
             {
                 _audioManager.PlaySFX(_audioManager.levelTimeOut);
@@ -88,7 +90,11 @@ public class TrainManager : MonoBehaviour
             }
         }
     }
-    
+
+    public void AdjustSlider()
+    {
+        fuelBar.value = allowedTimeForTravel;
+    }
     void StartRide()
     {
         _hasStarted = true;

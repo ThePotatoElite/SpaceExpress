@@ -14,7 +14,7 @@ public class PauseManager : MonoBehaviour
 
     void TogglePauseMenu()
     {
-        if (GameStateManager.Instance.CurrentGameState == GameState.Gameplay)
+        if (GameStateManager.Instance.CurrentGameState == GameState.Gameplay || GameStateManager.Instance.CurrentGameState == GameState.Planning)
         {
             PauseGame();
         }
@@ -32,6 +32,7 @@ public class PauseManager : MonoBehaviour
 
     void UnpauseGame()
     {
+        // need to check if the state before was planning or gamplay.
         GameStateManager.Instance.SetState(GameState.Gameplay);
         pauseMenuUI.SetActive(false);
     }
