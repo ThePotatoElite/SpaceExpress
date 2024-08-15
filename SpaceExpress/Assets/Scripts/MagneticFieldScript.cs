@@ -10,7 +10,7 @@ public class MagneticFieldScript : MonoBehaviour
     private void Awake()
     {
 
-       // trainRb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>();
+        trainRb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>();
 
     }
     private void OnTriggerStay(Collider other)

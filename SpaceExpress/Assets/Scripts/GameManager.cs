@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI tutorial;
     [SerializeField] TextMeshProUGUI wellDone;
     [SerializeField] GameObject beamPrefab;
+    [SerializeField] GameObject RailPrefab;
     // [SerializeField] GameObject mainCamera;
     // [SerializeField] CinemachineVirtualCamera cinemachineCamera;
     private GameObject _currentBeam;
@@ -84,6 +85,17 @@ public class GameManager : MonoBehaviour
     public void SpawnBeam()
     {
         _currentBeam = Instantiate(beamPrefab);
+        _isPlacingBeam = true;
+        _audioManager.PlaySFX(_audioManager.pickup);
+        Beam beamScript = _currentBeam.GetComponent<Beam>();
+        if (beamScript != null)
+        {
+            beamScript.SetPlacing(true);
+        }
+    }
+    public void SpawnRail()
+    {
+        _currentBeam = Instantiate(RailPrefab);
         _isPlacingBeam = true;
         _audioManager.PlaySFX(_audioManager.pickup);
         Beam beamScript = _currentBeam.GetComponent<Beam>();

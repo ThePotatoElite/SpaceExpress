@@ -222,7 +222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trainRb: {fileID: 0}
   rail: {fileID: 1457821218320592}
-  attractionForce: 10
+  attractionForce: 100
   railWidth: 0.5
 --- !u!54 &2285375597731795659
 Rigidbody:
