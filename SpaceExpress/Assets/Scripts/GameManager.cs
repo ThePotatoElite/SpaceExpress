@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections.Generic;
 using TMPro;
 // using Cinemachine;
 
@@ -10,7 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI tutorial;
     [SerializeField] TextMeshProUGUI wellDone;
     [SerializeField] GameObject beamPrefab;
-    [SerializeField] GameObject RailPrefab;
+    [SerializeField] GameObject railPrefab;
     // [SerializeField] GameObject mainCamera;
     // [SerializeField] CinemachineVirtualCamera cinemachineCamera;
     private GameObject _currentBeam;
@@ -95,7 +94,7 @@ public class GameManager : MonoBehaviour
     }
     public void SpawnRail()
     {
-        _currentBeam = Instantiate(RailPrefab);
+        _currentBeam = Instantiate(railPrefab);
         _isPlacingBeam = true;
         _audioManager.PlaySFX(_audioManager.pickup);
         Beam beamScript = _currentBeam.GetComponent<Beam>();

@@ -5236,6 +5236,7 @@ MonoBehaviour:
   pickup: {fileID: 8300000, guid: 6dad097e52118c04e86bfc4d5214ab85, type: 3}
   place: {fileID: 8300000, guid: 0968cc764bb59454aa8ffaf0161d4317, type: 3}
   rotate: {fileID: 8300000, guid: a69637bef47ba564db90e0493efe0aeb, type: 3}
+  destroy: {fileID: 8300000, guid: 99189e1d650d92a4b8ca62d598bf88e7, type: 3}
   completeAll: {fileID: 8300000, guid: f1c01d3fba469e94b833b95e4f7b0a84, type: 3}
   effectNumberOne: {fileID: 0}
   effectNumberTwo: {fileID: 0}

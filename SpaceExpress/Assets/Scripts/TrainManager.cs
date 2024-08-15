@@ -23,8 +23,6 @@ public class TrainManager : MonoBehaviour
     public float initialSpeed;
     public float allowedTimeForTravel = 15f;
     public static bool LevelDone = false;
-    private float _timeRemaining = 2f; // To show the Try Again message
-    private bool _showMessage = false;
     
     private bool OnRail { get => _onRail; set => _onRail = value; }
     public bool Ready { get => _ready; set => _ready = value; }
@@ -87,9 +85,7 @@ public class TrainManager : MonoBehaviour
                 restartButton.SetActive(false);
                 readyButton.SetActive(true);
                 StartCoroutine(ShowTimeIsUpMessage());
-
             }
-
         }
     }
     

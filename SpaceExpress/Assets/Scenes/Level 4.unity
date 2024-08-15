@@ -730,6 +730,7 @@ MonoBehaviour:
   tutorial: {fileID: 246181912}
   wellDone: {fileID: 326969175}
   beamPrefab: {fileID: 1664140531385298284, guid: c18f3c82749429949b4f3f1f2e0d0f47, type: 3}
+  RailPrefab: {fileID: 0}
   gravity: {x: 0, y: -7, z: 0}
 --- !u!1 &326969173
 GameObject:
@@ -3417,13 +3418,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 320429900}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: 
+      - m_Target: {fileID: 320429902}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: SpawnRail
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -5235,6 +5236,7 @@ MonoBehaviour:
   pickup: {fileID: 8300000, guid: 6dad097e52118c04e86bfc4d5214ab85, type: 3}
   place: {fileID: 8300000, guid: 0968cc764bb59454aa8ffaf0161d4317, type: 3}
   rotate: {fileID: 8300000, guid: a69637bef47ba564db90e0493efe0aeb, type: 3}
+  destroy: {fileID: 8300000, guid: 99189e1d650d92a4b8ca62d598bf88e7, type: 3}
   completeAll: {fileID: 8300000, guid: f1c01d3fba469e94b833b95e4f7b0a84, type: 3}
   effectNumberOne: {fileID: 0}
   effectNumberTwo: {fileID: 0}

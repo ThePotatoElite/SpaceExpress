@@ -38,10 +38,13 @@ public class Beam : MonoBehaviour
         {
             DragBeam();
             RotateBeam();
+            RemoveBeam();
         }
-
-        HighlightBeam(_isPlacing);
-        // HighlightBeam(_isDragging);
+        else
+        {
+            HighlightBeam(_isPlacing);
+            // HighlightBeam(_isDragging);
+        }
     }
     
     void OnMouseDown() // Pickup Beam
@@ -95,6 +98,15 @@ public class Beam : MonoBehaviour
             {
                 transform.Rotate(Vector3.right, -rotationSpeed * Time.deltaTime);
             }
+        }
+    }
+    
+    void RemoveBeam()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Destroy(gameObject);
+            _audioManager.PlaySFX(_audioManager.destroy);
         }
     }
 

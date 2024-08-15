@@ -15,6 +15,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip pickup;
     public AudioClip place;
     public AudioClip rotate;
+    public AudioClip destroy;
     public AudioClip completeAll;
     public AudioClip effectNumberOne;
     public AudioClip effectNumberTwo;
