@@ -1246,7 +1246,7 @@ MonoBehaviour:
   tutorial: {fileID: 286246791}
   wellDone: {fileID: 1392677926}
   beamPrefab: {fileID: 1664140531385298284, guid: c18f3c82749429949b4f3f1f2e0d0f47, type: 3}
-  RailPrefab: {fileID: 0}
+  railPrefab: {fileID: 1664140531385298284, guid: f83b03a37cd375d499a87a8a78732a37, type: 3}
   gravity: {x: 0, y: -7, z: 0}
 --- !u!1 &326210291
 GameObject:
@@ -4174,75 +4174,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1392677924}
   m_CullTransparentMesh: 1
---- !u!1001 &1437769307
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1457821218320592, guid: c18f3c82749429949b4f3f1f2e0d0f47, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 560
-      objectReference: {fileID: 0}
-    - target: {fileID: 1457821218320592, guid: c18f3c82749429949b4f3f1f2e0d0f47, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 75
-      objectReference: {fileID: 0}
-    - target: {fileID: 1457821218320592, guid: c18f3c82749429949b4f3f1f2e0d0f47, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1457821218320592, guid: c18f3c82749429949b4f3f1f2e0d0f47, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 1457821218320592, guid: c18f3c82749429949b4f3f1f2e0d0f47, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1457821218320592, guid: c18f3c82749429949b4f3f1f2e0d0f47, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 1457821218320592, guid: c18f3c82749429949b4f3f1f2e0d0f47, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1457821218320592, guid: c18f3c82749429949b4f3f1f2e0d0f47, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1457821218320592, guid: c18f3c82749429949b4f3f1f2e0d0f47, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 1457821218320592, guid: c18f3c82749429949b4f3f1f2e0d0f47, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1664140531385298284, guid: c18f3c82749429949b4f3f1f2e0d0f47, type: 3}
-      propertyPath: m_Name
-      value: TestBeam
-      objectReference: {fileID: 0}
-    - target: {fileID: 1664140531385298284, guid: c18f3c82749429949b4f3f1f2e0d0f47, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3591519212308256977, guid: c18f3c82749429949b4f3f1f2e0d0f47, type: 3}
-      propertyPath: gameManager
-      value: 
-      objectReference: {fileID: 320429902}
-    - target: {fileID: 7415871604735578195, guid: c18f3c82749429949b4f3f1f2e0d0f47, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: -4125471728267972529, guid: 105c86b069b3ac74ab66f254417571e6, type: 3}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: c18f3c82749429949b4f3f1f2e0d0f47, type: 3}
 --- !u!1 &1504529643
 GameObject:
   m_ObjectHideFlags: 0
@@ -4942,6 +4873,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1246ad6e5e32e724eb11cc049a0d6597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fuelBar: {fileID: 0}
   applySpeed: {x: 140, y: 0, z: 0}
   trainRb: {fileID: 1721921563}
   timeIsUpMessage: {fileID: 1628855129}
@@ -5897,5 +5829,4 @@ SceneRoots:
   - {fileID: 98530453}
   - {fileID: 201368523}
   - {fileID: 904585277}
-  - {fileID: 1437769307}
   - {fileID: 1721921561}

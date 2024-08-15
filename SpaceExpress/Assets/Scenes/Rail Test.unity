@@ -1246,7 +1246,7 @@ MonoBehaviour:
   tutorial: {fileID: 286246791}
   wellDone: {fileID: 1392677926}
   beamPrefab: {fileID: 1664140531385298284, guid: c18f3c82749429949b4f3f1f2e0d0f47, type: 3}
-  railPrefab: {fileID: 0}
+  railPrefab: {fileID: 1664140531385298284, guid: f83b03a37cd375d499a87a8a78732a37, type: 3}
   gravity: {x: 0, y: -7, z: 0}
 --- !u!1 &326210291
 GameObject:
@@ -5010,6 +5010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1246ad6e5e32e724eb11cc049a0d6597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fuelBar: {fileID: 0}
   applySpeed: {x: 140, y: 0, z: 0}
   trainRb: {fileID: 1721921563}
   timeIsUpMessage: {fileID: 1628855129}
