@@ -12,11 +12,10 @@ GameObject:
   - component: {fileID: 2712397994089062863}
   - component: {fileID: 7415871604735578195}
   - component: {fileID: 8931861559774619947}
-  - component: {fileID: 7583320467091125531}
   - component: {fileID: 5203175344084671541}
   - component: {fileID: 3591519212308256977}
   m_Layer: 0
-  m_Name: TryingBeam
+  m_Name: Rail Beam
   m_TagString: Beam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,7 +33,8 @@ Transform:
   m_LocalPosition: {x: 560, y: 115, z: 0}
   m_LocalScale: {x: 2000, y: 1200, z: 1000}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7041707587086668173}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!33 &2712397994089062863
@@ -111,29 +111,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.04000004, y: 0.019555561, z: 0.0998323}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!136 &7583320467091125531
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1664140531385298284}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.006
-  m_Height: 0.1
-  m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &5203175344084671541
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -176,3 +153,101 @@ MonoBehaviour:
   rotationSpeed: 120
   highlightMaterial: {fileID: 2100000, guid: 4cdef1d9b4d5cdf47a523d865d0d2fdd, type: 2}
   gameManager: {fileID: 0}
+--- !u!1 &2283007393231746855
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7041707587086668173}
+  - component: {fileID: 6798404223019890621}
+  - component: {fileID: 4119534227911244138}
+  - component: {fileID: 2285375597731795659}
+  m_Layer: 0
+  m_Name: Gravity Field
+  m_TagString: Rail
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7041707587086668173
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2283007393231746855}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.0064, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1457821218320592}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6798404223019890621
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2283007393231746855}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.03472083, y: 0.006, z: 0.10107222}
+  m_Center: {x: -0.002511463, y: 0.005, z: 0.0011312218}
+--- !u!114 &4119534227911244138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2283007393231746855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 494405d4202c160448b9f19456751340, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trainRb: {fileID: 0}
+  rail: {fileID: 1457821218320592}
+  attractionForce: 10
+  railWidth: 0.5
+--- !u!54 &2285375597731795659
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2283007393231746855}
+  serializedVersion: 4
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
