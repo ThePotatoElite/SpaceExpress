@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using TMPro;
+using System.Collections;
 
 public class TrainManager : MonoBehaviour
 {
@@ -78,29 +79,17 @@ public class TrainManager : MonoBehaviour
             }
 
             allowedTimeForTravel -= Time.deltaTime;
-            
+
             if (allowedTimeForTravel <= 0f)
             {
                 _audioManager.PlaySFX(_audioManager.levelTimeOut);
                 ResetTrain();
                 restartButton.SetActive(false);
                 readyButton.SetActive(true);
-                timeIsUpMessage.gameObject.SetActive(true);
-                _showMessage = true;
-                _timeRemaining = 2f; // Show for 2 seconds
-                timeIsUpMessage.gameObject.SetActive(false);
-                Debug.Log("Time's up! Resetting train back to its initial position!");
+                StartCoroutine(ShowTimeIsUpMessage());
+
             }
-            
-            if (_showMessage)
-            {
-                _timeRemaining -= Time.deltaTime;
-                if (_timeRemaining <= 0f)
-                {
-                    timeIsUpMessage.gameObject.SetActive(false);
-                    _showMessage = false;
-                }
-            }
+
         }
     }
     
@@ -196,5 +185,12 @@ public class TrainManager : MonoBehaviour
         {
             _isPaused = false;
         }
+    }
+
+    private IEnumerator ShowTimeIsUpMessage()
+    {
+        timeIsUpMessage.gameObject.SetActive(true);
+        yield return new WaitForSeconds(2f); 
+        timeIsUpMessage.gameObject.SetActive(false);
     }
 }
