@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5955844840416208063, guid: 818e05619340f23429787261480bf901, type: 3}
+  - {fileID: 2100000, guid: d467a65292e97c941964706b44c98705, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -274,7 +274,6 @@ GameObject:
   - component: {fileID: 9173649539881741693}
   - component: {fileID: 8988997268870758758}
   - component: {fileID: 6735173915086100589}
-  - component: {fileID: 2359903483132849339}
   m_Layer: 0
   m_Name: Wheels
   m_TagString: Wheels
@@ -328,7 +327,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -4125471728267972529, guid: 818e05619340f23429787261480bf901, type: 3}
+  - {fileID: 2100000, guid: 340e8230fc4b8e44db8427e49720952e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -373,19 +372,6 @@ CapsuleCollider:
   m_Height: 60
   m_Direction: 2
   m_Center: {x: 0, y: -4, z: 3}
---- !u!114 &2359903483132849339
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4742448671932954221}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6665669f044d3694d90cd67285f80b35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cart: {fileID: 0}
 --- !u!1 &5423403324693592137
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,8 +381,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6880174554567277290}
+  - component: {fileID: 4472132320518664477}
   m_Layer: 0
-  m_Name: polySurface4
+  m_Name: TailCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -417,6 +404,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 9109202786556614252}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &4472132320518664477
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5423403324693592137}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 4
+  m_Height: 20.457344
+  m_Direction: 1
+  m_Center: {x: 0, y: 24, z: -76}
 --- !u!1 &7816137476176338728
 GameObject:
   m_ObjectHideFlags: 0
