@@ -17,15 +17,33 @@ public class AudioManager : MonoBehaviour
     public AudioClip rotate;
     public AudioClip destroy;
     public AudioClip completeAll;
+    public AudioClip getHit;
+    public AudioClip explode;
     public AudioClip effectNumberOne;
     public AudioClip effectNumberTwo;
     public AudioClip effectNumberThree;
     public AudioClip effectNumberFour;
     public AudioClip effectNumberFive;
+    
+    private static AudioManager _instance;
 
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
+    
     private void Start()
     {
         musicSource.clip = backgroundMusic;
+        musicSource.loop = true;
         musicSource.Play();
     }
 

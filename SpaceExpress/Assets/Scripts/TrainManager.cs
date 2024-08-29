@@ -16,7 +16,7 @@ public class TrainManager : MonoBehaviour
     private AudioManager _audioManager;
     private Vector3 _initialTrainPosition;
     private Quaternion _initialTrainRotation;
-    private readonly int _health = 100;
+    private int _health = 100;
     private bool _ready = false;
     private bool _hasStarted = false;
     private bool _onRail = false;
@@ -148,6 +148,22 @@ public class TrainManager : MonoBehaviour
             Debug.Log("Level completed! Train's HP: " + _health);
             StartCoroutine(LoadNextSceneWithDelay());
         }
+        else if (other.CompareTag("Platform") || other.CompareTag("Wagon"))
+        {
+            _health -= 10;
+            Debug.Log("Train's hit! Its HP is: " + _health);
+
+            if (_health <= 0)
+            {
+                Debug.Log("Oh no! Train destroyed!");
+                _audioManager.PlaySFX(_audioManager.explode);
+                ResetTrain();
+            }
+            else
+            {
+                _audioManager.PlaySFX(_audioManager.getHit);
+            }
+        }
         /*
         else if (other.CompareTag("Obstacle"))
         {
@@ -176,6 +192,7 @@ public class TrainManager : MonoBehaviour
         applySpeed = new Vector3(_speed, 0f, 0f);
         Ready = false;
         OnRail = false;
+        _health = 100;
         allowedTimeForTravel = 15f;
     }
     

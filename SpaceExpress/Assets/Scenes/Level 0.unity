@@ -2426,6 +2426,7 @@ GameObject:
   - component: {fileID: 664984289}
   - component: {fileID: 664984291}
   - component: {fileID: 664984290}
+  - component: {fileID: 664984292}
   m_Layer: 5
   m_Name: BeamDeck
   m_TagString: Untagged
@@ -2488,6 +2489,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 664984288}
   m_CullTransparentMesh: 1
+--- !u!223 &664984292
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 664984288}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1 &669075797
 GameObject:
   m_ObjectHideFlags: 0
@@ -3700,6 +3724,8 @@ MonoBehaviour:
   rotate: {fileID: 8300000, guid: a69637bef47ba564db90e0493efe0aeb, type: 3}
   destroy: {fileID: 8300000, guid: 99189e1d650d92a4b8ca62d598bf88e7, type: 3}
   completeAll: {fileID: 8300000, guid: f1c01d3fba469e94b833b95e4f7b0a84, type: 3}
+  getHit: {fileID: 8300000, guid: 0f8db45b24d60a24789bea587a3d4f88, type: 3}
+  explode: {fileID: 8300000, guid: f66af4203978acb44ad93b84082b70b5, type: 3}
   effectNumberOne: {fileID: 0}
   effectNumberTwo: {fileID: 0}
   effectNumberThree: {fileID: 0}
@@ -6783,9 +6809,10 @@ GameObject:
   - component: {fileID: 2902008074237520250}
   - component: {fileID: 6484840017409651715}
   - component: {fileID: 5901893355800922545}
+  - component: {fileID: 6484840017409651716}
   m_Layer: 0
   m_Name: pCube2
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6858,6 +6885,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5265589511871793136}
   m_Mesh: {fileID: 5302568919011541938, guid: ad571182c865b2b4eb78afefd39d5517, type: 3}
+--- !u!65 &6484840017409651716
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5265589511871793136}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.003, y: 0.050914504, z: 0.01980587}
+  m_Center: {x: 0.031, y: -0.009216945, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

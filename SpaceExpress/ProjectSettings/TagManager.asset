@@ -6,12 +6,12 @@ TagManager:
   tags:
   - Flag
   - Wheels
-  - Ball
   - Rail
   - Beam
-  - TrainWheel
   - Audio
   - GameManager
+  - Platform
+  - Wagon
   layers:
   - Default
   - TransparentFX

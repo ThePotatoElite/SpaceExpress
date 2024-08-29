@@ -2463,9 +2463,10 @@ GameObject:
   - component: {fileID: 805290579}
   - component: {fileID: 805290581}
   - component: {fileID: 805290580}
+  - component: {fileID: 805290582}
   m_Layer: 0
   m_Name: Lvl_4_pCube7
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2538,6 +2539,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 805290578}
   m_Mesh: {fileID: -6791981372046286380, guid: 9cf0328fea3619e42b26ede8fe5d69e9, type: 3}
+--- !u!65 &805290582
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805290578}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.3, y: 8.060926, z: 1.9805881}
+  m_Center: {x: -4.1897125, y: 3.5387282, z: -0}
 --- !u!1 &814443435
 GameObject:
   m_ObjectHideFlags: 0
@@ -2549,9 +2571,10 @@ GameObject:
   - component: {fileID: 814443436}
   - component: {fileID: 814443438}
   - component: {fileID: 814443437}
+  - component: {fileID: 814443439}
   m_Layer: 0
   m_Name: pCube8_Lvl_4
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2624,6 +2647,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 814443435}
   m_Mesh: {fileID: 9148558000904966258, guid: 9cf0328fea3619e42b26ede8fe5d69e9, type: 3}
+--- !u!65 &814443439
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 814443435}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.3, y: 8.0609255, z: 1.9805881}
+  m_Center: {x: -4.3705573, y: -6.9903164, z: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -5877,6 +5921,8 @@ MonoBehaviour:
   rotate: {fileID: 8300000, guid: a69637bef47ba564db90e0493efe0aeb, type: 3}
   destroy: {fileID: 8300000, guid: 99189e1d650d92a4b8ca62d598bf88e7, type: 3}
   completeAll: {fileID: 8300000, guid: f1c01d3fba469e94b833b95e4f7b0a84, type: 3}
+  getHit: {fileID: 8300000, guid: 0f8db45b24d60a24789bea587a3d4f88, type: 3}
+  explode: {fileID: 8300000, guid: f66af4203978acb44ad93b84082b70b5, type: 3}
   effectNumberOne: {fileID: 0}
   effectNumberTwo: {fileID: 0}
   effectNumberThree: {fileID: 0}
