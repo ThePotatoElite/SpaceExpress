@@ -439,10 +439,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1999424074}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 963291044}
+        m_TargetAssemblyTypeName: PauseMenuScript, Assembly-CSharp
+        m_MethodName: MuteButton
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2554,7 +2554,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -2662,7 +2662,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -3122,6 +3122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 1849051979}
+  muteButton: {fileID: 221021699}
 --- !u!114 &963291045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5909,6 +5910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b07e2ca66859142b2fef40e9b07349, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 1666b46b8e1f81d4488870972b32a593, type: 2}
   musicSource: {fileID: 1574797314}
   soundEffectsSource: {fileID: 622327374}
   backgroundMusic: {fileID: 8300000, guid: 6ef6584b7034cab46a9c207eaa9b5bcb, type: 3}
@@ -5926,8 +5928,6 @@ MonoBehaviour:
   effectNumberOne: {fileID: 0}
   effectNumberTwo: {fileID: 0}
   effectNumberThree: {fileID: 0}
-  effectNumberFour: {fileID: 0}
-  effectNumberFive: {fileID: 0}
 --- !u!4 &1999424076
 Transform:
   m_ObjectHideFlags: 0

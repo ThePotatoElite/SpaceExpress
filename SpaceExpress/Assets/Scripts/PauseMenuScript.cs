@@ -1,10 +1,13 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PauseMenuScript : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu;
+    [SerializeField] Button muteButton;
+    // [SerializeField] Slider musicVolumeSlider;
+    // [SerializeField] Slider sfxVolumeSlider;
     // [SerializeField] GameObject settingsMenu;
-    // public AudioManager audioManage;
     
     public void Pause()
     {
@@ -16,6 +19,21 @@ public class PauseMenuScript : MonoBehaviour
     {
         GameStateManager.Instance.SetState(GameState.Gameplay);
         pauseMenu.SetActive(false);
+    }
+    
+    public void MuteButton()
+    {
+        AudioManager.Instance.ToggleMute();
+    }
+    /*
+    public void SetMusicVolume(float volume)
+    {
+        AudioManager.Instance.SetMusicVolume(volume);
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        AudioManager.Instance.SetSFXVolume(volume);
     }
     /*
     public void Settings()

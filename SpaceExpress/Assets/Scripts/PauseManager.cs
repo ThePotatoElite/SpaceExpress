@@ -32,7 +32,7 @@ public class PauseManager : MonoBehaviour
 
     void UnpauseGame()
     {
-        // need to check if the state before was planning or gamplay.
+        // Need to check if the state before was Planning or Gameplay.
         GameStateManager.Instance.SetState(GameState.Gameplay);
         pauseMenuUI.SetActive(false);
     }

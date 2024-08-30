@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
         trainManager.Ready = true;
         trainManager.applySpeed = new Vector3(trainManager.initialSpeed, 0f, 0f);
         _driveMode = true;
+        Time.timeScale = 2f; // Increase the gameplay speed to 2
         // SwitchToCinemachineCamera();
     }
 
@@ -64,6 +65,7 @@ public class GameManager : MonoBehaviour
         _driveMode = false;
         wellDone.gameObject.SetActive(false);
         trainManager.ResetTrain();
+        Time.timeScale = 1f; // Return the gameplay speed to 1
     }
     
     public void Rewind()
@@ -73,34 +75,43 @@ public class GameManager : MonoBehaviour
         wellDone.gameObject.SetActive(false);
         trainManager.ResetTrain();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1f; // Return the gameplay speed to 1
     }
 
     void Celebration()
     {
         _driveMode = false;
         wellDone.gameObject.SetActive(true);
+        Time.timeScale = 1f; // Return the gameplay speed to 1
     }
     
     public void SpawnBeam()
     {
-        _currentBeam = Instantiate(beamPrefab);
-        _isPlacingBeam = true;
-        _audioManager.PlaySFX(_audioManager.pickup);
-        Beam beamScript = _currentBeam.GetComponent<Beam>();
-        if (beamScript != null)
+        if (!trainManager.Ready)
         {
-            beamScript.SetPlacing(true);
+            _currentBeam = Instantiate(beamPrefab);
+            _isPlacingBeam = true;
+            _audioManager.PlaySFX(_audioManager.pickup);
+            Beam beamScript = _currentBeam.GetComponent<Beam>();
+            if (beamScript != null)
+            {
+                beamScript.SetPlacing(true);
+            }
         }
     }
+    
     public void SpawnRail()
     {
-        _currentBeam = Instantiate(railPrefab);
-        _isPlacingBeam = true;
-        _audioManager.PlaySFX(_audioManager.pickup);
-        Beam beamScript = _currentBeam.GetComponent<Beam>();
-        if (beamScript != null)
+        if (!trainManager.Ready)
         {
-            beamScript.SetPlacing(true);
+            _currentBeam = Instantiate(railPrefab);
+            _isPlacingBeam = true;
+            _audioManager.PlaySFX(_audioManager.pickup);
+            Beam beamScript = _currentBeam.GetComponent<Beam>();
+            if (beamScript != null)
+            {
+                beamScript.SetPlacing(true);
+            }
         }
     }
 

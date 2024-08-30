@@ -246,6 +246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 224764700}
+  muteButton: {fileID: 250081357}
 --- !u!1 &106368237
 GameObject:
   m_ObjectHideFlags: 0
@@ -846,10 +847,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1070912785}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 98530454}
+        m_TargetAssemblyTypeName: PauseMenuScript, Assembly-CSharp
+        m_MethodName: MuteButton
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3712,6 +3713,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b07e2ca66859142b2fef40e9b07349, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 1666b46b8e1f81d4488870972b32a593, type: 2}
   musicSource: {fileID: 676421922}
   soundEffectsSource: {fileID: 2099006869}
   backgroundMusic: {fileID: 8300000, guid: 6ef6584b7034cab46a9c207eaa9b5bcb, type: 3}
@@ -3729,8 +3731,6 @@ MonoBehaviour:
   effectNumberOne: {fileID: 0}
   effectNumberTwo: {fileID: 0}
   effectNumberThree: {fileID: 0}
-  effectNumberFour: {fileID: 0}
-  effectNumberFive: {fileID: 0}
 --- !u!1 &1130730118
 GameObject:
   m_ObjectHideFlags: 0
@@ -4805,19 +4805,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1583080086}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1070912785}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &1589201762
 GameObject:
   m_ObjectHideFlags: 0
@@ -6900,7 +6888,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3

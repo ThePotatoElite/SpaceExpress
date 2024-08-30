@@ -1,7 +1,11 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
+    [Header("------- Audio Mixer -------")]
+    [SerializeField] AudioMixer audioMixer;
+    
     [Header("------- Audio Source -------")]
     [SerializeField] AudioSource musicSource;
     [SerializeField] AudioSource soundEffectsSource;
@@ -22,12 +26,11 @@ public class AudioManager : MonoBehaviour
     public AudioClip effectNumberOne;
     public AudioClip effectNumberTwo;
     public AudioClip effectNumberThree;
-    public AudioClip effectNumberFour;
-    public AudioClip effectNumberFive;
     
     private static AudioManager _instance;
+    private bool _isMuted = false;
 
-    private void Awake()
+    void Awake()
     {
         if (_instance != null && _instance != this)
         {
@@ -40,7 +43,7 @@ public class AudioManager : MonoBehaviour
         }
     }
     
-    private void Start()
+    void Start()
     {
         musicSource.clip = backgroundMusic;
         musicSource.loop = true;
@@ -50,5 +53,34 @@ public class AudioManager : MonoBehaviour
     public void PlaySFX(AudioClip clip)
     {
         soundEffectsSource.PlayOneShot(clip);
+    }
+    
+    public static AudioManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindFirstObjectByType<AudioManager>();
+                DontDestroyOnLoad(_instance.gameObject);
+            }
+            return _instance;
+        }
+    }
+    
+    public void SetMusicVolume(float volume)
+    {
+        musicSource.volume = volume;
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        soundEffectsSource.volume = volume;
+    }
+    
+    public void ToggleMute()
+    {
+        _isMuted = !_isMuted;
+        audioMixer.SetFloat("MasterVolume", _isMuted ? -80f : 0f);
     }
 }

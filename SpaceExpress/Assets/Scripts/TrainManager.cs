@@ -150,7 +150,7 @@ public class TrainManager : MonoBehaviour
         }
         else if (other.CompareTag("Platform") || other.CompareTag("Wagon"))
         {
-            _health -= 10;
+            _health -= 25;
             Debug.Log("Train's hit! Its HP is: " + _health);
 
             if (_health <= 0)
@@ -158,6 +158,7 @@ public class TrainManager : MonoBehaviour
                 Debug.Log("Oh no! Train destroyed!");
                 _audioManager.PlaySFX(_audioManager.explode);
                 ResetTrain();
+                StartCoroutine(ShowTimeIsUpMessage());
             }
             else
             {
