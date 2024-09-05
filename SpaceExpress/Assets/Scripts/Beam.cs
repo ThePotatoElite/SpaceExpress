@@ -84,23 +84,48 @@ public class Beam : MonoBehaviour
             HighlightBeam(false);
         }
     }
-
     void RotateBeam()
     {
         if (!gameManager.DriveMode)
         {
+            // Handle keyboard input
             if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) // Rotate Beam counterclockwise
             {
-                transform.Rotate(Vector3.right, rotationSpeed * Time.deltaTime);
+                transform.Rotate(Vector3.right, rotationSpeed * Time.deltaTime, Space.Self);
             }
 
             if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) // Rotate Beam clockwise
             {
-                transform.Rotate(Vector3.right, -rotationSpeed * Time.deltaTime);
+                transform.Rotate(Vector3.right, -rotationSpeed * Time.deltaTime, Space.Self);
+            }
+
+            // Handle mobile input
+            if (Input.touchCount == 2)
+            {
+                Touch touch1 = Input.GetTouch(0);
+                Touch touch2 = Input.GetTouch(1);
+
+                // Determine which touch is the second finger
+                Touch secondTouch = touch2;
+
+                // Calculate the delta position of the second touch
+                Vector2 secondTouchDelta = secondTouch.deltaPosition;
+
+                // Determine rotation direction based on the y-direction of the second touch movement
+                if (secondTouchDelta.y > 0)
+                {
+                    // Second finger moved up - rotate beam clockwise
+                    transform.Rotate(Vector3.right, -rotationSpeed * Time.deltaTime, Space.Self);
+                }
+                else if (secondTouchDelta.y < 0)
+                {
+                    // Second finger moved down - rotate beam counterclockwise
+                    transform.Rotate(Vector3.right, rotationSpeed * Time.deltaTime, Space.Self);
+                }
             }
         }
     }
-    
+
     void RemoveBeam()
     {
         if (Input.GetKeyDown(KeyCode.R))
