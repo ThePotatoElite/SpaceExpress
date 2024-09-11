@@ -12,6 +12,7 @@ TagManager:
   - GameManager
   - Platform
   - Wagon
+  - Slider
   layers:
   - Default
   - TransparentFX

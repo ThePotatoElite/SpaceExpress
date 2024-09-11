@@ -1,16 +1,18 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Beam : MonoBehaviour
 {
     [SerializeField] float rotationSpeed = 120f;
     [SerializeField] Material highlightMaterial;
     [SerializeField] GameManager gameManager;
+    [SerializeField] Slider rotationSlider; 
+
     private Vector3 _offset;
-    // private Vector3 _forceDirection;
     private bool _isDragging = false;
     private bool _isCollidingWithBeam = false;
     private bool _isCollidingWithPlayer = false;
-    private bool _isPlacing = false; // Should I remove this entirely and switch all to _isDragging?
+    private bool _isPlacing = false;
     private Camera _mainCamera;
     private Material _originalMaterial;
     private Renderer _beamRenderer;
@@ -20,8 +22,9 @@ public class Beam : MonoBehaviour
     {
         _audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        rotationSlider = GameObject.FindGameObjectWithTag("Slider").GetComponent<Slider>();
     }
-    
+
     void Start()
     {
         _mainCamera = Camera.main;
@@ -31,27 +34,32 @@ public class Beam : MonoBehaviour
             _originalMaterial = _beamRenderer.material;
         }
     }
-    
+
     void Update()
     {
         if (_isDragging)
         {
-            DragBeam();
-            RotateBeam();
-            RemoveBeam();
+            if (CanRotate())
+            {
+                RotateBeam();
+            }
+            else
+            {
+                DragBeam();
+                RemoveBeam();
+            }
         }
         else
         {
             HighlightBeam(_isPlacing);
-            // HighlightBeam(_isDragging);
         }
     }
-    
-    void OnMouseDown() // Pickup Beam
+
+    void OnMouseDown() 
     {
         if (!gameManager.DriveMode)
         {
-            if (Input.GetMouseButton(0)) // if (!_isDragging)? - Something different to try?
+            if (Input.GetMouseButton(0))
             {
                 _isDragging = true;
                 _audioManager.PlaySFX(_audioManager.pickup);
@@ -60,14 +68,20 @@ public class Beam : MonoBehaviour
         }
     }
 
-    void OnMouseUp() // Place Beam
+    void OnMouseUp() 
     {
-        if (Input.GetMouseButtonUp(0)) // if (_isDragging)? - Something different to try?
+        if (Input.GetMouseButtonUp(0))
         {
             _isDragging = false;
             _isPlacing = false;
             _audioManager.PlaySFX(_audioManager.place);
             HighlightBeam(false);
+
+           
+            if (rotationSlider != null)
+            {
+                rotationSlider.value = 0f;
+            }
         }
     }
 
@@ -75,6 +89,7 @@ public class Beam : MonoBehaviour
     {
         if (!_isCollidingWithBeam && !_isCollidingWithPlayer)
         {
+            if(Input.touchCount < 2)
             transform.position = GetMouseWorldPosition() + _offset;
             HighlightBeam(true);
         }
@@ -84,46 +99,33 @@ public class Beam : MonoBehaviour
             HighlightBeam(false);
         }
     }
+
     void RotateBeam()
     {
-        if (!gameManager.DriveMode)
+        if (!gameManager.DriveMode && rotationSlider != null)
         {
-            // Handle keyboard input
-            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) // Rotate Beam counterclockwise
-            {
-                transform.Rotate(Vector3.right, rotationSpeed * Time.deltaTime, Space.Self);
-            }
+            float sliderValue = rotationSlider.value;
 
-            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) // Rotate Beam clockwise
+            if (Mathf.Approximately(sliderValue, 1f))
             {
                 transform.Rotate(Vector3.right, -rotationSpeed * Time.deltaTime, Space.Self);
             }
-
-            // Handle mobile input
-            if (Input.touchCount == 2)
+            else if (Mathf.Approximately(sliderValue, -1f))
             {
-                Touch touch1 = Input.GetTouch(0);
-                Touch touch2 = Input.GetTouch(1);
-
-                // Determine which touch is the second finger
-                Touch secondTouch = touch2;
-
-                // Calculate the delta position of the second touch
-                Vector2 secondTouchDelta = secondTouch.deltaPosition;
-
-                // Determine rotation direction based on the y-direction of the second touch movement
-                if (secondTouchDelta.y > 0)
-                {
-                    // Second finger moved up - rotate beam clockwise
-                    transform.Rotate(Vector3.right, -rotationSpeed * Time.deltaTime, Space.Self);
-                }
-                else if (secondTouchDelta.y < 0)
-                {
-                    // Second finger moved down - rotate beam counterclockwise
-                    transform.Rotate(Vector3.right, rotationSpeed * Time.deltaTime, Space.Self);
-                }
+                transform.Rotate(Vector3.right, rotationSpeed * Time.deltaTime, Space.Self);
             }
         }
+    }
+
+    bool CanRotate()
+    {
+        if (rotationSlider == null)
+        {
+            return false;
+        }
+
+        float sliderValue = rotationSlider.value;
+        return Mathf.Approximately(sliderValue, 1f) || Mathf.Approximately(sliderValue, -1f);
     }
 
     void RemoveBeam()
@@ -141,7 +143,7 @@ public class Beam : MonoBehaviour
         mouseScreenPosition.z = _mainCamera.WorldToScreenPoint(transform.position).z;
         return _mainCamera.ScreenToWorldPoint(mouseScreenPosition);
     }
-    
+
     void HighlightBeam(bool highlight)
     {
         if (_beamRenderer)
@@ -149,12 +151,12 @@ public class Beam : MonoBehaviour
             _beamRenderer.material = highlight ? highlightMaterial : _originalMaterial;
         }
     }
-    
+
     public void SetPlacing(bool isPlacing)
     {
         _isPlacing = isPlacing;
     }
-    
+
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Beam"))
@@ -166,7 +168,7 @@ public class Beam : MonoBehaviour
             _isCollidingWithPlayer = true;
         }
     }
-    
+
     void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.CompareTag("Beam"))

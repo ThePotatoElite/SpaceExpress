@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PullForce : MonoBehaviour
+public class PullForce : MonoBehaviour // is it working?
 {
     [SerializeField] float pullRadius = 250f;
     [SerializeField] float pullForce = 100f;

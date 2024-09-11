@@ -75,7 +75,6 @@ public class TrainManager : MonoBehaviour
             else if (OnRail)
             {
                 Debug.Log("On Rail"); // NOT WORKING
-                MoveTrainOnRail();
             }
 
             allowedTimeForTravel -= Time.deltaTime;
@@ -122,13 +121,6 @@ public class TrainManager : MonoBehaviour
         {
             trainRb.AddForce(Vector3.zero, ForceMode.Acceleration); // Remove Beam Force
         }
-    }
-
-    void MoveTrainOnRail()
-    {
-        /*
-        trainRb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionY;
-        */
     }
     
     void MoveTrain()

@@ -14,16 +14,18 @@ public class PauseMenuScript : MonoBehaviour
         GameStateManager.Instance.SetState(GameState.Pause);
         pauseMenu.SetActive(true);
     }
-    
     public void Resume()
     {
         GameStateManager.Instance.SetState(GameState.Gameplay);
         pauseMenu.SetActive(false);
     }
-    
     public void MuteButton()
     {
         AudioManager.Instance.ToggleMute();
+    }
+    public void ExitGame()
+    {
+        Application.Quit();
     }
     /*
     public void SetMusicVolume(float volume)
@@ -51,8 +53,5 @@ public class PauseMenuScript : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
     */
-    public void ExitGame()
-    {
-        Application.Quit();
-    }
+
 }

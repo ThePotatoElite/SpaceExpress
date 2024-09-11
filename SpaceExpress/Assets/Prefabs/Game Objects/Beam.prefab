@@ -128,9 +128,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be78b810ffb033a419f7bac426ed192e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 120
+  rotationSpeed: 60
   highlightMaterial: {fileID: 2100000, guid: 4cdef1d9b4d5cdf47a523d865d0d2fdd, type: 2}
   gameManager: {fileID: 0}
+  rotationSlider: {fileID: 0}
 --- !u!65 &9073735831904756111
 BoxCollider:
   m_ObjectHideFlags: 0
