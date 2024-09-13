@@ -12,6 +12,8 @@ public class TrainManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI timeIsUpMessage;
     [SerializeField] GameObject restartButton;
     [SerializeField] GameObject readyButton;
+    [SerializeField] GameObject explosionPrefab;
+    [SerializeField] GameObject flameParticle;
     // private Vector3 _beamPosition;
     private AudioManager _audioManager;
     private Vector3 _initialTrainPosition;
@@ -42,6 +44,7 @@ public class TrainManager : MonoBehaviour
     void Awake()
     {
         _audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        flameParticle.SetActive(false);
     }
     
     void Start()
@@ -100,6 +103,7 @@ public class TrainManager : MonoBehaviour
         _hasStarted = true;
         trainRb.linearVelocity = applySpeed;
         Physics.gravity = new Vector3(-5, 0, 0);
+        flameParticle.SetActive(true);
     }
 
     void PauseRide()
@@ -109,6 +113,7 @@ public class TrainManager : MonoBehaviour
         applySpeed = new Vector3(_speed, 0f, 0f);
         Physics.gravity = new Vector3(0, 0, 0);
         _hasStarted = false;
+        flameParticle.SetActive(false);
     }
     
     public void SetOnRail(bool onRail)
@@ -157,6 +162,8 @@ public class TrainManager : MonoBehaviour
             {
                 Debug.Log("Oh no! Train destroyed!");
                 _audioManager.PlaySFX(_audioManager.explode);
+                GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+                Destroy(explosion, 2f);
                 ResetTrain();
                 StartCoroutine(ShowTimeIsUpMessage());
             }
@@ -195,6 +202,7 @@ public class TrainManager : MonoBehaviour
         OnRail = false;
         _health = 100;
         allowedTimeForTravel = 15f;
+        flameParticle.SetActive(false);
     }
     
     void OnGameStateChanged(GameState newGameState)
